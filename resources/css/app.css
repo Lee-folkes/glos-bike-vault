@@ -10,6 +10,23 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+html, body{
+    height: 100%;
+}
+
+body{
+    min-height: 100svh;
+    margin: 0;
+    background-color: var(--colour-dark-primary);
+    background-image:
+        radial-gradient(420px 420px at 12% 18%, rgba(162, 220, 242, 0.55), transparent 60%),
+        radial-gradient(520px 520px at 85% 12%, rgba(56, 92, 115, 0.55), transparent 62%),
+        radial-gradient(680px 680px at 78% 82%, rgba(35, 34, 38, 0.8), transparent 65%),
+        radial-gradient(560px 560px at 22% 78%, rgba(43, 39, 48, 0.7), transparent 62%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 :root {
 /* custom Properties for consistency */
 
@@ -72,46 +89,91 @@
     --z-index-tooltip: 1200;
     
 }
-
-body {
-    background-image: linear-gradient(to right top, #232226, #2b2b34, #323542, #364051, #394c60, #415b71, #496a81, #517a92, #6491a9, #78aac1, #8dc3da, #a2dcf2);
+h1{
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--colour-light-primary);
 }
 
-.login-container {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-    background-color: rgba(255, 255, 255, 0.479);
-    padding: var(--spacing-lg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-lg);
+p{
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-light);
+    color: var(--colour-light-primary);
+    opacity: 0.8;
 }
-.form-container {
-    align-items: center;
+.header{
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-base);
-    width: 100%;
-    max-width: 400px;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
 }
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100svh;
+}
+
+.login-card{
+    display: flex;
+    align-items: center;
+    background-color: #2b273078;
+    padding: 4rem;
+    border-radius: var(--border-radius-lg);
+}   
 
 .login-form form{
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-base);
+    align-items: center;
+    width: 30vw;
+    padding: var(--spacing-lg);
+    gap: var(--spacing-lg);
 }
 
-.logo img{
-    width: 150px;
-    height: auto;
-    margin-bottom: var(--spacing-lg);
+.login-form input{
+    background-color: lightgrey;
+    padding: 0.8rem;
+    border-radius: var(--border-radius-base);
+    width: 25vw;
 }
 
-.login-header h1 {
-    font-family: var(--font-primary);
-    font-size: var(--font-size-3xl);
-    color: var(--colour-dark-primary);
-    margin-bottom: var(--spacing-lg);
+.login-form button{
+    background-color: var(--colour-highlight-secondary);
+    padding: 0.8rem;
+    width: 25vw;
+    border-radius: var(--border-radius-base);
 }
+
+.login-form button:hover{
+    background-color: var(--colour-highlight-primary);
+    color: var(--colour-light-primary);
+    transition: var(--transition-duration) var(--transition-easing);
+    cursor: pointer;
+}
+
+.login-logo img{
+    width: 25vw;
+    aspect-ratio: 1/1;
+    background-color: #f2f2f2e3;
+    border-radius: 100vw;
+}
+
+.register{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.register button{
+    background-color: var(--colour-light-primary);
+}
+
+
