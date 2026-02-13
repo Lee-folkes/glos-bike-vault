@@ -8,7 +8,7 @@
         </div>
         <div class="login-form">
             <div class="header">
-                <h1>Welcome to the Glos Bike Vault</h1>
+                <h1>Welcome back</h1>
                 <p>Please enter your details</p>
             </div>
             <form id="loginForm">
@@ -17,7 +17,7 @@
                 <button type="submit">Login</button>
                 <div class="register">
                     <p>Don't have an account?</p>
-                    <button type="button" onclick="window.location.href='/register'">Register</button>
+                    <a href="/register">Register here</a>
                 </div>
             </form>        
             
