@@ -48,13 +48,25 @@ if (registerForm) {
             //Initialize CSRF protection
             await axios.get('/sanctum/csrf-cookie');
 
+            //check if all fields are filled
+            if (!name || !email || !password || !passwordConfirmation) {
+                messageBox.innerText = "Please fill in all fields!";
+                return;
+            }
+
+            //check password length & complexity (at least 8 characters, including a number and a special character)
+            const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                messageBox.innerText = "Password must be at least 8 characters long and include a number and a special character!";
+                return;
+            }
+
             //check if passwords match before sending the request
             if (password !== passwordConfirmation) {
                 messageBox.innerText = "Passwords do not match!";
                 return;
             }
 
-            
 
             //Send the Registration request
             const response = await axios.post('/api/register', {

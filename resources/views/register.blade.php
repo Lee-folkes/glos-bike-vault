@@ -23,9 +23,10 @@
                     <p>Already have an account?</p>
                     <a href="/login">Login here</a>
                 </div>
+                <p id="message"></p>
             </form>        
             
-            <p id="message"></p>
+            
         </div> 
     </div>
 </div>

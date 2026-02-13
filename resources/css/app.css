@@ -235,5 +235,14 @@ p{
     transition: var(--transition-duration) var(--transition-easing);
 }
 
+#message{
+    color: red;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    max-width: 23vw;
+    text-align: center;
+}
+
 
 /*TODO: Add media queries for responsiveness */
