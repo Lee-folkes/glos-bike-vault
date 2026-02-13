@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@extends('layouts.app')
-@section('content')
 
 <div class="container">
     <div class="login-card">
@@ -13,20 +11,25 @@
                 <h1>Sign Up</h1>
                 <p>Please enter your details</p>
             </div>
-            <form id="registerForm">
-                <input type="text" name="name" id="name" placeholder="Name" required>
-                <input type="email" name="email" id="email" placeholder="Email" required>
+            <form method="POST" action="{{ url('/register') }}">
+                @csrf
+                <input type="text" name="name" id="name" placeholder="Name" value="{{ old('name') }}" required>
+                <input type="email" name="email" id="email" placeholder="Email" value="{{ old('email') }}" required>
                 <input type="password" name="password" id="password" placeholder="Password" required>
-                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
+                <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirm Password" required>
                 <button type="submit">Register</button>
                 <div class="register">
                     <p>Already have an account?</p>
                     <a href="/login">Login here</a>
                 </div>
-                <p id="message"></p>
+                @if ($errors->any())
+                    <div style="color: red; margin-top: 10px;">
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}</p>
+                        @endforeach
+                    </div>
+                @endif
             </form>        
-            
-            
         </div> 
     </div>
 </div>

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
+use Laravel\Fortify\Contracts\RegisterResponse;
+use Laravel\Fortify\Contracts\TwoFactorConfirmedResponse;
 use Laravel\Fortify\Fortify;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -29,6 +31,41 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Override response bindings to control post-registration and 2FA confirmation redirects
+        $this->app->singleton(RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($request)
+                {
+                    return redirect('/two-factor-setup');
+                }
+            };
+        });
+
+        $this->app->singleton(TwoFactorConfirmedResponse::class, function () {
+            return new class implements TwoFactorConfirmedResponse {
+                public function toResponse($request)
+                {
+                    auth()->logout();
+                    $request->session()->invalidate();
+                    $request->session()->regenerateToken();
+
+                    return redirect('/login')->with('status', 'Two-factor authentication confirmed. Please log in.');
+                }
+            };
+        });
+
+        Fortify::loginView(function () {
+            return view('login');
+        });
+
+        Fortify::registerView(function () {
+            return view('register');
+        });
+
+        Fortify::twoFactorChallengeView(function () {
+            return view('two-factor-challenge');
+        });
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
