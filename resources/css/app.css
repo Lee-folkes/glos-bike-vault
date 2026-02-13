@@ -173,7 +173,14 @@ p{
     background-color: #2b273078;
     padding: 4rem;
     border-radius: var(--border-radius-lg);
-}   
+} 
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
 
 .login-form form{
     display: flex;
@@ -209,6 +216,7 @@ p{
     cursor: pointer;
 }
 
+
 .login-logo img{
     width: 25vw;
     aspect-ratio: 1/1;
@@ -241,6 +249,27 @@ p{
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     max-width: 23vw;
+    text-align: center;
+}
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 8px;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.qr-code svg {
+        width: 200px;
+        height: 200px;
+}
+
+.login-form p {
     text-align: center;
 }
 
