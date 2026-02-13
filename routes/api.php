@@ -22,6 +22,28 @@ Route::post('/login', function (Request $request) {
     return response()->json(['message' => 'Logged in successfully']);
 });
 
+
+Route::post('/register', function (Request $request) {
+    // Validate the input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8',
+    ]);
+
+    // Create the user
+    $user = \App\Models\User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+    ]);
+
+    // Log the user in
+    Auth::login($user);
+
+    return response()->json(['message' => 'Registered successfully']);
+});
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');

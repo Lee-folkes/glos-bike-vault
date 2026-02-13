@@ -10,12 +10,12 @@ Route::get('/', function () {
 // Show the login page
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 
 //show the registration page
 Route::get('/register', function () {
     return view('register');
-});
+})->name('register');
 
 // Show the dashboard (protected route)
 Route::get('/dashboard', function () {
