@@ -67,7 +67,6 @@ if (registerForm) {
                 return;
             }
 
-
             //Send the Registration request
             const response = await axios.post('/api/register', {
                 name: name,
@@ -77,6 +76,7 @@ if (registerForm) {
 
             messageBox.innerText = "Success! Redirecting...";
             window.location.href = '/login'; // After registration, send them to the login page
+            //TODO: Consider pushing them to MFA setup.
 
         } catch (error) {
             messageBox.innerText = "Registration Failed: " + error.response.data.message;

@@ -19,9 +19,8 @@
                     <p>Don't have an account?</p>
                     <a href="/register">Register here</a>
                 </div>
+                <p id="message"></p>
             </form>        
-            
-            <p id="message"></p>
         </div> 
     </div>
 </div>
