@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@push('styles')
+    @vite('resources/css/pages/login_register.css')
+@endpush
 @section('content')
 
 <div class="container">
