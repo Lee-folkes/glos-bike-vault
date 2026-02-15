@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- This layout is used for the main app pages that require authentication. 
- It includes the standard navigation and layout for logged-in users. -->
+<!-- This layout is used for guest pages like login and registration, 
+ which have a different design from the main app layout. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
-    @include('partials.nav')
+    <nav> </nav>
     <main>
         @yield('content') 
 </body>

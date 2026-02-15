@@ -55,15 +55,15 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::loginView(function () {
-            return view('login');
+            return view('auth.login');
         });
 
         Fortify::registerView(function () {
-            return view('register');
+            return view('auth.register');
         });
 
         Fortify::twoFactorChallengeView(function () {
-            return view('two-factor-challenge');
+            return view('auth.two-factor-challenge');
         });
 
         Fortify::createUsersUsing(CreateNewUser::class);

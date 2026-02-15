@@ -81,6 +81,36 @@ body{
     --z-index-dropdown: 1000;
     --z-index-modal: 1100;
     --z-index-tooltip: 1200;
-    
 }
 
+/* Navigation */
+.nav-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+.nav-container a{
+    color: #a9a8a8;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+}
+
+.nav-container a:hover{
+    color: var(--colour-highlight-secondary);
+    transition: var(--transition-duration) var(--transition-easing);
+}
+
+.nav-container .active{
+    color: var(--colour-light-primary);
+}
+
+.nav-container li{
+    list-style: none;
+    display: inline-block;
+    margin-left: var(--spacing-lg);
+}

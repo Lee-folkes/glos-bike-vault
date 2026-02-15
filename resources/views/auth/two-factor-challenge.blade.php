@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 @push('styles')
     @vite('resources/css/pages/login_register.css')
 @endpush
