@@ -11,6 +11,7 @@ html, body{
 body{
     min-height: 100svh;
     margin: 0;
+    overflow-x: hidden;
     background-color: var(--colour-dark-primary);
     background-image:
         radial-gradient(420px 420px at 12% 18%, rgba(162, 220, 242, 0.55), transparent 60%),
@@ -85,11 +86,36 @@ body{
 
 /* Navigation */
 .nav-container{
-    display: flex;
-    justify-content: space-between;
+    --nav-logo-size: 60px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: center;
     padding: var(--spacing-lg);
+    width: 100%;
+    overflow-x: clip;
+}
+
+.nav-container::after{
+    content: '';
+    width: var(--nav-logo-size);
+    height: 1px;
+}
+
+.nav-logo{
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-decoration: none;
+}
+
+.nav-logo img{
+    height: var(--nav-logo-size);
+    width: auto;
+    display: block;
+}
+
+.nav-container .navbar{
+    justify-self: center;
 }
 
 .nav-container a{
@@ -98,6 +124,9 @@ body{
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
     text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .nav-container a:hover{
@@ -109,8 +138,16 @@ body{
     color: var(--colour-light-primary);
 }
 
+.nav-container ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
 .nav-container li{
     list-style: none;
     display: inline-block;
-    margin-left: var(--spacing-lg);
 }
+
