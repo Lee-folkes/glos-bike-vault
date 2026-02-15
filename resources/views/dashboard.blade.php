@@ -1,19 +1,14 @@
 @extends('layouts.app')
+@push('styles')
+    @vite('resources/css/pages/dashboard.css')
+@endpush
 @section('content')
 
-<div class="container">
-    <div class="login-card">
-        <div class="login-form">
-            <div class="header">
-                <h1>Dashboard</h1>
-                <p>Welcome, {{ auth()->user()->name }}!</p>
-            </div>
-
-            <form method="POST" action="{{ url('/logout') }}">
-                @csrf
-                <button type="submit">Logout</button>
-            </form>
-        </div>
-    </div>
+<div class="header">
+    <h1>Welcome, {{ auth()->user()->name }}!</h1>
 </div>
+
+            
+
+
 @endsection
