@@ -1,5 +1,80 @@
-.header{
+input, select{
+    background-color: lightgrey;
+    padding: 1rem;
+    border-radius: var(--border-radius-base);
+}
+
+button{
+    background-color: var(--colour-highlight-secondary);
+    padding: 0.5rem 1.25rem;
+    flex: 0 0 auto;
+    border-radius: var(--border-radius-base);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border: none;
+}
+button:hover{
+    background-color: var(--colour-light-primary);
+    color: var(--colour-highlight-primary);
+    transition: var(--transition-duration) var(--transition-easing);
+    cursor: pointer;
+}
+/* --- Top Toolbar Section (Search & Filter) --- */
+.container {
+    max-width: 90vw;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.toolbar-section {
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.toolbar-container {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.search-group {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 30%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+    border: 1px solid var(--colour-dark-secondary);
+    border-radius: var(--border-radius-base);
+    font-size: 0.85rem;
+    box-sizing: border-box;
+}
+
+.search-group::before {
+    content: "🔍";
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.filter-select {
+    flex: 0 0 auto;
+    width: 10rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--colour-dark-secondary);
+    border-radius: var(--border-radius-base);
+    background-color: var(--colour-light-primary);
+    color: var(--colour-dark-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    box-sizing: border-box;
 }
