@@ -43,14 +43,25 @@
             <button type="button" class="modal-close" id="closeModalBtn" aria-label="Close">&times;</button>
         </div>
         <div class="modal-body">
-            <form id="registerBikeForm">
+            <form id="registerBikeForm" method="POST" action="{{ route('bikes.store') }}">
+                @csrf
+                <div class="form-group form-row-full">
+                    <label for="bikeNick">Bike Nickname</label>
+                    <input name="nickname" type="text" id="bikeNick" placeholder="Enter bike nickname" required>
+                </div>
+
                 <div class="form-group">
-                    <label for="bikeName">Bike Name</label>
-                    <input type="text" id="bikeName" placeholder="Enter bike name" required>
+                    <label for="bikeBrand">Brand</label>
+                    <input name="brand" type="text" id="bikeBrand" placeholder="Enter brand" required>
                 </div>
                 <div class="form-group">
+                    <label for="model">Model</label>
+                    <input name="model" type="text" id="model" placeholder="Enter model" required>
+                </div>
+
+                <div class="form-group">
                     <label for="bikeType">Bike Type</label>
-                    <select id="bikeType" required>
+                    <select name="type" id="bikeType" required>
                         <option value="">Select Type</option>
                         <option value="road">Road Bike</option>
                         <option value="mountain">Mountain Bike</option>
@@ -59,11 +70,58 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="serialNumber">Serial Number</label>
-                    <input type="text" id="serialNumber" placeholder="Enter serial number" required>
+                    <label for="mpnNumber">MPN / Serial Number</label>
+                    <input name="mpn" type="text" id="mpnNumber" placeholder="Enter MPN number" required>
                 </div>
-                <!-- Additional fields can be added here -->
-                <button type="submit">Register Bike</button>
+
+                <div class="form-group">
+                    <label for="wheelSize">Wheel Size (inches)</label>
+                    <input name="wheel_size" type="text" id="wheelSize" placeholder="Enter wheel size" required>
+                </div>
+                <div class="form-group">
+                    <label for="colour">Colour</label>
+                    <input name="colour" type="text" id="colour" placeholder="Enter colour" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="numGears">Number of Gears</label>
+                    <input name="num_gears" type="text" id="numGears" placeholder="Enter number of gears" required>
+                </div>
+                <div class="form-group">
+                    <label for="brakeType">Brake Type</label>
+                    <input name="brake_type" type="text" id="brakeType" placeholder="Enter brake type" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="bikeSuspension">Suspension Type</label>
+                    <select name="suspension" id="bikeSuspension" required>
+                        <option value="">Select Type</option>
+                        <option value="full">Full Suspension</option>
+                        <option value="hardtail">Hardtail</option>
+                        <option value="none">None</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="bikeGender">Gender</label>
+                    <select name="gender" id="bikeGender" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-row-full">
+                    <label for="ageGroup">Age Group</label>
+                    <select name="age_group" id="ageGroup" required>
+                        <option value="">Select Age Group</option>
+                        <option value="child">Child</option>
+                        <option value="teen">Teen</option>
+                        <option value="adult">Adult</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="form-row-full">Register Bike</button>
             </form>
         </div>
     </div>

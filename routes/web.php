@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BikeController;
 
 // Show the landing page
 Route::get('/', function () {
@@ -50,6 +51,11 @@ Route::get('/two-factor-setup', function () {
     }
     return view('auth.two-factor-setup');
 })->middleware('auth');
+
+// Store new bike (protected route)
+Route::post('/bikes', [BikeController::class, 'store'])
+    ->middleware('auth')
+    ->name('bikes.store');
 
 
 

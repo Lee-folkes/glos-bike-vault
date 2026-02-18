@@ -47,4 +47,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    /*
+     * Get the bikes for the user.
+     */
+    public function bikes()
+    {
+        return $this->hasMany(Bike::class);
+    }
+    
+
 }

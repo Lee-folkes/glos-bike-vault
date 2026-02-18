@@ -24,3 +24,7 @@ modal.addEventListener('click', function(e) {
     }
 });
 
+// Submit the form when the "Submit" button is clicked
+document.getElementById('submitBikeBtn').addEventListener('click', function() {
+    document.getElementById('registerBikeForm').submit();
+});
