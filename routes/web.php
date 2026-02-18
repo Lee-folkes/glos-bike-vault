@@ -20,7 +20,8 @@ Route::get('/register', function () {
 
 // Show the dashboard (protected route)
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $bikes = auth()->user()->bikes()->latest()->get();
+    return view('dashboard', compact('bikes'));
 })->middleware('auth')->name('dashboard');
 
 // Show the user profile (protected route)

@@ -79,6 +79,128 @@ button:hover{
     box-sizing: border-box;
 }
 
+/* --- Bike Cards Section --- */
+
+.bikes-section {
+    padding: 0 0 var(--spacing-xl);
+}
+
+.bikes-empty {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    font-family: var(--font-primary);
+    color: var(--colour-light-primary);
+    opacity: 0.6;
+}
+
+.bikes-empty p {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-base);
+}
+
+.bikes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.bike-card {
+    background-color: #2b273078;
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-base);
+    transition: transform var(--transition-duration) var(--transition-easing),
+                box-shadow var(--transition-duration) var(--transition-easing);
+}
+
+.bike-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.bike-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.bike-card-name {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--colour-light-primary);
+    margin: 0;
+}
+
+.bike-card-type {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--colour-highlight-primary);
+    background-color: var(--colour-highlight-secondary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-base);
+    white-space: nowrap;
+}
+
+.bike-card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+}
+
+.bike-card-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.detail-label {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--colour-light-primary);
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.detail-value {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-normal);
+    color: var(--colour-light-primary);
+}
+
+.bike-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(242, 242, 242, 0.1);
+}
+
+.bike-card-meta {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--colour-highlight-secondary);
+}
+
+.bike-card-date {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs);
+    color: var(--colour-light-primary);
+    opacity: 0.4;
+}
+
+/* --- Register Bike Modal --- */
+/* ...existing code... */
+
 /* --- Register Bike Modal --- */
 
 /* Hide inert elements to prevent them from being visible, focusable, or read by screen readers.
