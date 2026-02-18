@@ -78,3 +78,114 @@ button:hover{
     font-size: 0.85rem;
     box-sizing: border-box;
 }
+
+/* --- Register Bike Modal --- */
+
+/* Hide inert elements to prevent them from being visible, focusable, or read by screen readers.
+The inert attribute is preferred over aria-hidden as it also prevents focus,
+avoiding conflicts when a descendant retains focus.
+*/
+.modal-overlay[inert] {
+    display: none;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(35, 34, 38, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-index-modal);
+}
+
+.modal-dialog {
+    background-color: #2b273078;
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    width: min(90vw, 480px);
+    box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-lg);
+}
+
+.modal-title {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--colour-light-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--colour-light-primary);
+    font-size: var(--font-size-xl);
+    opacity: 0.6;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+}
+
+.modal-close:hover {
+    opacity: 1;
+    background-color: transparent;
+    color: var(--colour-highlight-secondary);
+    transition: var(--transition-duration) var(--transition-easing);
+}
+
+.modal-body form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.form-group label {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--colour-light-primary);
+    opacity: 0.8;
+}
+
+.form-group input,
+.form-group select {
+    background-color: lightgrey;
+    padding: 0.8rem;
+    border-radius: var(--border-radius-base);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    color: var(--colour-dark-primary);
+    width: 100%;
+}
+
+.modal-body button[type="submit"] {
+    background-color: var(--colour-highlight-secondary);
+    padding: 0.65rem;
+    border-radius: var(--border-radius-base);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: var(--spacing-sm);
+}
+
+.modal-body button[type="submit"]:hover {
+    background-color: var(--colour-light-primary);
+    color: var(--colour-highlight-primary);
+    transition: var(--transition-duration) var(--transition-easing);
+}
+
