@@ -23,6 +23,7 @@ return new class extends Migration
                 $table->string('suspension');
                 $table->string('gender');
                 $table->string('age_group');
+                $table->string('status')->default('active'); // New status field with default value
                 $table->timestamps();
             });
             

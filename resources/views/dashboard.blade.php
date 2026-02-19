@@ -32,23 +32,53 @@
         </div>
     </section>
 
-    <!-- Bike Cards Section:
-     Display of registered bikes with status indicators -->
+    <!-- Bike Cards Section -->
     <section class="bikes-section">
         <div class="container">
+            <div class="bikes-section-header">
+                <div class="h2">Your Registered Bikes</div>
+            </div>
+
+            <!-- If no bikes are registered, show empty state message -->
             @if($bikes->isEmpty())
                 <div class="bikes-empty">
                     <p>You haven't registered any bikes yet.</p>
                     <p>Click <strong>+ Register New Bike</strong> to get started.</p>
                 </div>
+
+            <!-- Else loop through registered bikes and display each in a card format -->
             @else
                 <div class="bikes-grid">
                     @foreach($bikes as $bike)
                         <div class="bike-card">
+
+                            <!--Action buttons for edit, status change, and delete (only shown on hover) -->
+                            <!-- TODO Add accessible labels and keyboard support for these buttons -->
+                            <div class="bike-card-actions">
+                                <button class="action-btn action-edit" title="Edit" 
+                                data-bike-id="{{ $bike->id }}"
+                                data-bike="{{ json_encode($bike->only(['nickname','brand','model','type','mpn','wheel_size','colour','num_gears','brake_type','suspension','gender','age_group'])) }}">
+                                    <i class="bx bx-edit-alt"></i>
+                                    <span>Edit</span>
+                                </button>
+                                <button class="action-btn action-status" title="Change Status" data-bike-id="{{ $bike->id }}">
+                                    <i class="bx bx-alert-triangle"></i>
+                                    <span>Status</span>
+                                </button>
+                                <button class="action-btn action-delete" title="Delete" data-bike-id="{{ $bike->id }}">
+                                    <i class="bx bx-trash"></i>
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+
+                            <!-- Bike name, type and status display -->
                             <div class="bike-card-header">
                                 <h3 class="bike-card-name">{{ $bike->nickname }}</h3>
                                 <span class="bike-card-type">{{ ucfirst($bike->type) }}</span>
+                                <span class="bike-card-type status-{{ $bike->status }}">{{ ucfirst($bike->status) }}</span>
                             </div>
+
+                            <!-- Remaining bike details -->
                             <div class="bike-card-body">
                                 <div class="bike-card-detail">
                                     <span class="detail-label">Brand</span>
@@ -83,6 +113,8 @@
                                     <span class="detail-value">{{ ucfirst($bike->suspension) }}</span>
                                 </div>
                             </div>
+
+                            <!-- Footer with gender, age group and registration date -->
                             <div class="bike-card-footer">
                                 <span class="bike-card-meta">{{ ucfirst($bike->gender) }} · {{ ucfirst($bike->age_group) }}</span>
                                 <span class="bike-card-date">Registered {{ $bike->created_at->format('d M Y') }}</span>
@@ -104,6 +136,7 @@
         <div class="modal-body">
             <form id="registerBikeForm" method="POST" action="{{ route('bikes.store') }}">
                 @csrf
+                <input type="hidden" name="_method" id="formMethod" value="POST">
                 <div class="form-group form-row-full">
                     <label for="bikeNick">Bike Nickname</label>
                     <input name="nickname" type="text" id="bikeNick" placeholder="Enter bike nickname" required>
@@ -180,7 +213,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="form-row-full">Register Bike</button>
+                <button type="submit" class="form-row-full" id="BikeSubmitBtn">Register Bike</button>
             </form>
         </div>
     </div>

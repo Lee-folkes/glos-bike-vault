@@ -58,5 +58,9 @@ Route::post('/bikes', [BikeController::class, 'store'])
     ->middleware('auth')
     ->name('bikes.store');
 
+// Update existing bike (protected route)
+Route::put('/bikes/{bike}', [BikeController::class, 'update'])
+    ->middleware('auth')
+    ->name('bikes.update');
 
 

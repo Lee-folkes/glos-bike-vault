@@ -85,6 +85,19 @@ button:hover{
     padding: 0 0 var(--spacing-xl);
 }
 
+.bikes-section-header {
+    display: flex;
+    margin-bottom: var(--spacing-lg);
+}
+
+.bikes-section-header .h2 {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-extrabold);
+    color: var(--colour-light-primary);
+    margin: 0;
+}
+
 .bikes-empty {
     text-align: center;
     padding: var(--spacing-xl) 0;
@@ -113,7 +126,8 @@ button:hover{
     flex-direction: column;
     gap: var(--spacing-base);
     transition: transform var(--transition-duration) var(--transition-easing),
-                box-shadow var(--transition-duration) var(--transition-easing);
+    box-shadow var(--transition-duration) var(--transition-easing);
+    position: relative;
 }
 
 .bike-card:hover {
@@ -147,6 +161,26 @@ button:hover{
     white-space: nowrap;
 }
 
+.status-active {
+    background-color: green;
+    color: var(--colour-light-primary);
+}
+
+.status-stolen {
+    background-color: red;
+    color: var(--colour-light-primary);
+}
+
+.status-sold {
+    background-color: gray;
+    color: var(--colour-light-primary);
+}
+
+.status-recovered {
+    background-color: blue;
+    color: var(--colour-light-primary);
+}
+
 .bike-card-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -176,6 +210,64 @@ button:hover{
     color: var(--colour-light-primary);
 }
 
+/* --- Bike Card Hover Actions --- */
+
+.bike-card-actions {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--border-radius-lg);
+    background-color: rgba(20, 18, 24, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-duration) var(--transition-easing),
+                visibility var(--transition-duration) var(--transition-easing);
+    z-index: 2;
+}
+
+.bike-card:hover .bike-card-actions {
+    opacity: 1;
+    visibility: visible;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: none;
+    border: none;
+    color: var(--colour-light-primary);
+    cursor: pointer;
+    padding: var(--spacing-sm) var(--spacing-base);
+    border-radius: var(--border-radius-base);
+    transition: color var(--transition-duration) var(--transition-easing),
+    background-color var(--transition-duration) var(--transition-easing);
+}
+
+.action-btn i {
+    font-size: 1.5rem;
+}
+
+.action-btn span {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+}
+
+.action-btn:hover {
+    background-color: rgba(242, 242, 242, 0.1);
+    color: var(--colour-highlight-secondary);
+}
+
+.action-delete:hover {
+    color: #ef4444;
+}
+
 .bike-card-footer {
     display: flex;
     align-items: center;
@@ -198,8 +290,6 @@ button:hover{
     opacity: 0.4;
 }
 
-/* --- Register Bike Modal --- */
-/* ...existing code... */
 
 /* --- Register Bike Modal --- */
 
