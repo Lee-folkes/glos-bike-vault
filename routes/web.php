@@ -5,7 +5,7 @@ use App\Http\Controllers\BikeController;
 
 // Show the landing page
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
 
 // Login and Register views are handled by Fortify (see FortifyServiceProvider)
