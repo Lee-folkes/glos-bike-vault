@@ -8,6 +8,15 @@
       "app.css"
     ]
   },
+  "resources/css/pages/dashboard.css": {
+    "file": "assets/dashboard-C91J37NB.css",
+    "src": "resources/css/pages/dashboard.css",
+    "isEntry": true,
+    "name": "dashboard",
+    "names": [
+      "dashboard.css"
+    ]
+  },
   "resources/css/pages/login_register.css": {
     "file": "assets/login_register-BepZ0YKL.css",
     "src": "resources/css/pages/login_register.css",
@@ -21,6 +30,12 @@
     "file": "assets/app-DIuewKhF.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/pages/dashboard.js": {
+    "file": "assets/dashboard-BgXR702C.js",
+    "name": "dashboard",
+    "src": "resources/js/pages/dashboard.js",
     "isEntry": true
   }
 }

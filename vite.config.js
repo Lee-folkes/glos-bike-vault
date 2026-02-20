@@ -10,6 +10,9 @@ export default defineConfig({
                  'resources/js/app.js',
                  //Page specific css
                  'resources/css/pages/login_register.css',
+                 'resources/css/pages/dashboard.css',
+                 //Page specific js
+                 'resources/js/pages/dashboard.js',
                 ],
             refresh: true,
         }),
