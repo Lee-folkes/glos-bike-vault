@@ -57,5 +57,25 @@ class BikeController extends Controller
     
             return redirect()->route('dashboard')->with('success', 'Bike updated successfully!');
         }
-    }    
+
+    // Method to update the status of a bike
+    public function updateStatus(Request $request, Bike $bike)
+    {
+        // Ensure the authenticated user owns this bike
+        if ($bike->user_id !== $request->user()->id) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'status' => 'required|string|in:active,stolen,sold',
+        ]);
+
+        $bike->update($validated);
+
+        return response()->json([
+            'success' => true,
+            'status'  => $bike->status,
+        ]);
+    }
+}    
     

@@ -55,4 +55,9 @@ Route::put('/bikes/{bike}', [BikeController::class, 'update'])
     ->middleware('auth')
     ->name('bikes.update');
 
+// Update bike status (protected route)
+Route::patch('/bikes/{bike}/status', [BikeController::class, 'updateStatus'])
+    ->middleware('auth')
+    ->name('bikes.updateStatus');
+
 

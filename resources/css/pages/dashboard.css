@@ -264,9 +264,7 @@ button:hover{
 }
 
 
-
-
-.bike-card:hover .bike-card-actions {
+.bike-card:hover:not(.hide-actions) .bike-card-actions {
     opacity: 1;
     visibility: visible;
 }

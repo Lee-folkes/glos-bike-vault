@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/pages/dashboard.css": {
-    "file": "assets/dashboard-DJ22yXDY.css",
+    "file": "assets/dashboard-Diu3Hrvo.css",
     "src": "resources/css/pages/dashboard.css",
     "isEntry": true,
     "name": "dashboard",
@@ -33,7 +33,7 @@
     "isEntry": true
   },
   "resources/js/pages/dashboard.js": {
-    "file": "assets/dashboard-WDKh6zQ3.js",
+    "file": "assets/dashboard-CyTNbcK4.js",
     "name": "dashboard",
     "src": "resources/js/pages/dashboard.js",
     "isEntry": true
