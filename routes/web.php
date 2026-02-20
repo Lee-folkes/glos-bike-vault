@@ -8,15 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Show the login page
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-//show the registration page
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+// Login and Register views are handled by Fortify (see FortifyServiceProvider)
 
 // Show the dashboard (protected route)
 Route::get('/dashboard', function () {
