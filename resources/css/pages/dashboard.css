@@ -248,6 +248,10 @@ button:hover{
 }
 
 .status-option{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
     background-color: var(--colour-highlight-secondary);
     padding: 0.5rem 1.25rem;
     border-radius: var(--border-radius-base);
@@ -256,7 +260,7 @@ button:hover{
     font-weight: var(--font-weight-medium);
     border: none;
     cursor: pointer;
-    width: 80%;
+    width: 70%;
 }
 
 

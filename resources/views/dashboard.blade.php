@@ -76,7 +76,7 @@
                             <div class="bike-card-status-menu">
                                 <button class="status-option" data-status="active" data-bike-id="{{ $bike->id }}">
                                     <i class="bx bx-check"></i>
-                                    <span>Mark as Active / Safe</span>
+                                    <span>Mark as Active<span>
                                 </button>
                                 <button class="status-option" data-status="stolen" data-bike-id="{{ $bike->id }}">
                                     <i class="bx bx-x"></i>
@@ -84,7 +84,7 @@
                                 </button>
                                 <button class="status-option" data-status="sold" data-bike-id="{{ $bike->id }}">
                                     <i class="bx bx-archive"></i>
-                                    <span>Mark as Sold / Archived</span>
+                                    <span>Mark as Sold</span>
                                 </button>
                             </div>
 
