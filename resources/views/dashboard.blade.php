@@ -87,6 +87,14 @@
                                     <span>Mark as Sold</span>
                                 </button>
                             </div>
+                            
+                            <!-- Delete confirmation menu (only shown on hover) -->
+                            <div class="bike-card-delete-menu">
+                                <p>Are you sure you want to delete this bike?</p>
+                                <button class="delete-confirm" data-bike-id="{{ $bike->id }}">Yes, Delete</button>
+                                <button class="delete-cancel" data-bike-id="{{ $bike->id }}">Cancel</button>
+                            </div>
+                                
 
                             <!-- Bike name, type and status display -->
                             <div class="bike-card-header">

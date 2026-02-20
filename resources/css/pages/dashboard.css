@@ -210,9 +210,9 @@ button:hover{
     color: var(--colour-light-primary);
 }
 
-/* --- Bike Card Hover Actions --- */
+/* --- Bike Card Actions --- */
 
-.bike-card-actions {
+.bike-card-status-menu, .bike-card-delete-menu, .bike-card-actions {
     position: absolute;
     inset: 0;
     border-radius: var(--border-radius-lg);
@@ -229,22 +229,16 @@ button:hover{
     z-index: 2;
 }
 
-.bike-card-status-menu {
-    position: absolute;
-    inset: 0;
-    border-radius: var(--border-radius-lg);
-    background-color: rgba(20, 18, 24, 0.85);
-    backdrop-filter: blur(4px);
-    display: flex;
+.bike-card-status-menu, .bike-card-delete-menu {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-lg);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-duration) var(--transition-easing),
-    visibility var(--transition-duration) var(--transition-easing);
-    z-index: 2;
+}
+
+.bike-card-delete-menu p {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--colour-light-primary);
+    margin: 0;
 }
 
 .status-option{

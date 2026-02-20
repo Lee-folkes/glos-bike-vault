@@ -98,6 +98,40 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// Delete menu buttons on each bike card
+function openDeleteMenu(event) {
+    const menu = this.closest('.bike-card').querySelector('.bike-card-delete-menu');
+    if (menu) {
+        menu.style.visibility = 'visible';
+        menu.style.opacity = '1';
+    }
+}
+
+document.querySelectorAll('.action-delete').forEach(function(btn) {
+    btn.addEventListener('click', openDeleteMenu);
+});
+
+// Close delete menu when clicking outside of it
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.bike-card-delete-menu') && !e.target.closest('.action-delete')) {
+        document.querySelectorAll('.bike-card-delete-menu').forEach(function(menu) {
+            menu.style.visibility = 'hidden';
+            menu.style.opacity = '0';
+        });
+    }
+});
+
+// Close delete menu when clicking "Cancel"
+document.querySelectorAll('.delete-cancel').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        const menu = this.closest('.bike-card-delete-menu');
+        if (menu) {
+            menu.style.visibility = 'hidden';
+            menu.style.opacity = '0';
+        }
+    });
+});
+
 // Status option buttons — send PATCH request to update bike status
 document.querySelectorAll('.status-option').forEach(function(btn) {
     btn.addEventListener('click', function() {
