@@ -74,3 +74,26 @@ document.querySelectorAll('.action-edit').forEach(function(btn) {
         openEditModal(bikeId, bikeData);
     });
 });
+
+// Status menu buttons on each bike card
+function openStatusMenu(event) {
+    const menu = this.closest('.bike-card').querySelector('.bike-card-status-menu');
+    if (menu) {
+        menu.style.visibility = 'visible';
+        menu.style.opacity = '1';
+    }
+}
+
+document.querySelectorAll('.action-status').forEach(function(btn) {
+    btn.addEventListener('click', openStatusMenu);
+});
+
+// Close status menu when clicking outside of it
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.bike-card-status-menu') && !e.target.closest('.action-status')) {
+        document.querySelectorAll('.bike-card-status-menu').forEach(function(menu) {
+            menu.style.visibility = 'hidden';
+            menu.style.opacity = '0';
+        });
+    }
+});

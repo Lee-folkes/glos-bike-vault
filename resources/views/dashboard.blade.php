@@ -71,6 +71,23 @@
                                 </button>
                             </div>
 
+                            <!--status change menu (only shown on hover) -->
+                            <!-- TODO Add accessible labels and keyboard support for these buttons -->
+                            <div class="bike-card-status-menu">
+                                <button class="status-option" data-status="active" data-bike-id="{{ $bike->id }}">
+                                    <i class="bx bx-check"></i>
+                                    <span>Mark as Active / Safe</span>
+                                </button>
+                                <button class="status-option" data-status="stolen" data-bike-id="{{ $bike->id }}">
+                                    <i class="bx bx-x"></i>
+                                    <span>Report as Stolen</span>
+                                </button>
+                                <button class="status-option" data-status="sold" data-bike-id="{{ $bike->id }}">
+                                    <i class="bx bx-archive"></i>
+                                    <span>Mark as Sold / Archived</span>
+                                </button>
+                            </div>
+
                             <!-- Bike name, type and status display -->
                             <div class="bike-card-header">
                                 <h3 class="bike-card-name">{{ $bike->nickname }}</h3>
