@@ -4,6 +4,7 @@
 @endpush
 @push ('scripts')
     @vite('resources/js/pages/dashboard.js')
+@endpush
 @section('content')
 
 
@@ -78,7 +79,8 @@
                                     <i class="bx bx-check"></i>
                                     <span>Mark as Active<span>
                                 </button>
-                                <button class="status-option" data-status="stolen" data-bike-id="{{ $bike->id }}">
+                                <button class="status-option action-report" data-status="stolen" data-bike-id="{{ $bike->id }}"
+                                    data-bike="{{ json_encode($bike->only(['nickname'])) }}">
                                     <i class="bx bx-x"></i>
                                     <span>Report as Stolen</span>
                                 </button>
@@ -242,6 +244,38 @@
             </form>
         </div>
     </div>
+
+</div>
+
+<!-- Report Stolen bike modal -->
+<div class="modal-overlay" id="reportStolenModal" aria-labelledby="reportStolenModalLabel" inert>
+    <div class="modal-dialog">
+        <div class="modal-header"> 
+            <h2 class="modal-title" id="reportStolenModalLabel">Report <strong id="reportBikeNickname">this bike</strong> as Stolen</h2>
+            <button type="button" class="modal-close" id="closeReportModalBtn" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <input type="hidden" id="reportBikeId" value="">
+            <form id="reportStolenForm" method="POST" action="">
+                @csrf
+                @method('PATCH')
+                <!-- TODO Add a form field for user to provide last known location, 
+                 then pass this to openstreetmap geocoding API to get lat/lng coordinates to save with the bike record.
+                 
+                 Also, display a map in the modal showing the location of the theft using leaflet.js..
+                 -->
+                 <div class="form-group">
+                    <label for="theftLocation">Last Known Location of Bike</label>
+                    <input name="theft_location" type="text" id="theftLocation" placeholder="Enter location">
+                    <button type="button" id="getLocationBtn" class="btn btn-secondary">Add Location</button>
+                </div>
+                 
+                <button type="submit" class="btn btn-danger form-row-full">Done</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
     
 

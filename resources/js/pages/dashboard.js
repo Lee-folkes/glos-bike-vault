@@ -77,6 +77,7 @@ document.querySelectorAll('.action-edit').forEach(function(btn) {
 
 // Status menu buttons on each bike card
 function openStatusMenu(event) {
+    event.stopPropagation();
     const menu = this.closest('.bike-card').querySelector('.bike-card-status-menu');
     if (menu) {
         menu.style.visibility = 'visible';
@@ -133,7 +134,8 @@ document.querySelectorAll('.delete-cancel').forEach(function(btn) {
 });
 
 // Status option buttons — send PATCH request to update bike status
-document.querySelectorAll('.status-option').forEach(function(btn) {
+// Skip .action-report buttons; those open a confirmation modal instead
+document.querySelectorAll('.status-option:not(.action-report)').forEach(function(btn) {
     btn.addEventListener('click', function() {
         const bikeId = this.getAttribute('data-bike-id');
         const newStatus = this.getAttribute('data-status');
@@ -190,3 +192,30 @@ document.querySelectorAll('.status-option').forEach(function(btn) {
         });
     });
 });
+
+// Open Report Stolen modal
+document.querySelectorAll('.action-report').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();  // prevent status-menu close handler
+        const bikeId = this.getAttribute('data-bike-id');
+        const bikeData = JSON.parse(this.getAttribute('data-bike'));
+        const modal = document.getElementById('reportStolenModal');
+        modal.querySelector('#reportBikeId').value = bikeId;
+        modal.querySelector('#reportBikeNickname').textContent = bikeData.nickname || 'this bike';
+        modal.querySelector('#reportStolenForm').action = '/bikes/' + bikeId + '/status';
+        modal.removeAttribute('inert');
+    });
+});
+
+// Close Report Stolen modal
+function closeReportModal() {
+    document.getElementById('reportStolenModal').setAttribute('inert', '');
+}
+document.getElementById('closeReportModalBtn').addEventListener('click', closeReportModal);
+document.getElementById('cancelReportBtn').addEventListener('click', closeReportModal);
+
+// Close Report Stolen modal when clicking on overlay
+document.getElementById('reportStolenModal').addEventListener('click', function(e) {
+    if (e.target === this) closeReportModal();
+});
+

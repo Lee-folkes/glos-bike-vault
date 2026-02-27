@@ -22,5 +22,7 @@
     @include('partials.nav')
     <main>
         @yield('content') 
+    </main>
+    @stack('scripts')
 </body>
 </html>

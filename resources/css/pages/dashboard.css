@@ -435,3 +435,30 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     transition: var(--transition-duration) var(--transition-easing);
 }
 
+/* --- Report Stolen Modal --- */
+
+/* Highlight the bike nickname in the modal title */
+#reportStolenModal strong {
+    color: var(--colour-highlight-secondary);
+}
+
+
+
+/* Button styles for the Report Stolen modal */
+#reportStolenModal button{
+    background-color: var(--colour-highlight-secondary);
+    border-radius: var(--border-radius-base);
+}
+
+#reportStolenModal button:hover {
+    background-color: var(--colour-light-primary);
+    color: var(--colour-highlight-primary);
+    transition: var(--transition-duration) var(--transition-easing);
+}
+
+#getLocationBtn {
+    padding: var(--spacing-sm);
+}
+
+
+
