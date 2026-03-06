@@ -454,19 +454,41 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     transition: var(--transition-duration) var(--transition-easing);
 }
 
+/* Location input + search button inline group */
+.location-input-group {
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: stretch;
+}
+
+.location-input-group input {
+    flex: 1;
+}
+
 #getLocationBtn {
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-base);
+    white-space: nowrap;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
 }
 
 /* Map container in the Report Stolen modal */
 #reportMap {
+    display: none;
+    height: 280px;
     border: 1px solid var(--colour-light-secondary, #ccc);
     border-radius: var(--border-radius-base);
+    z-index: 1;
 }
 
+/* Feedback text below the search button */
 #locationFeedback {
-    font-size: 0.9rem;
-    padding: var(--spacing-xs, 4px) 0;
+    display: none;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) 0;
 }
 
 

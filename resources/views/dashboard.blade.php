@@ -261,16 +261,18 @@
             <form id="reportStolenForm" method="POST" action="">
                 @csrf
                 @method('PATCH')
-                 <div class="form-group">
+                <div class="form-group form-row-full">
                     <label for="theftLocation">Last Known Location of Bike</label>
-                    <input name="theft_location" type="text" id="theftLocation" placeholder="Enter location (e.g. Gloucester, UK)">
-                    <button type="button" id="getLocationBtn" class="btn btn-secondary">Add Location</button>
+                    <div class="location-input-group">
+                        <input name="theft_location" type="text" id="theftLocation" placeholder="Enter location (e.g. Gloucester, UK or a valid postcode)" required>
+                        <button type="button" id="getLocationBtn">Search</button>
+                    </div>
                 </div>
-                <div id="locationFeedback" style="display:none; margin-bottom: 10px;"></div>
-                <div id="reportMap" style="display:none; height: 250px; margin-bottom: 15px; border-radius: var(--border-radius-base); z-index: 1;"></div>
+                <div id="locationFeedback" class="form-row-full"></div>
+                <div id="reportMap" class="form-row-full"></div>
                 <input type="hidden" id="reportLatitude" name="latitude" value="">
                 <input type="hidden" id="reportLongitude" name="longitude" value="">
-                <button type="submit" class="btn btn-danger form-row-full">Done</button>
+                <button type="submit" class="form-row-full">Done</button>
             </form>
         </div>
     </div>

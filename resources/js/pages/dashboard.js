@@ -231,7 +231,6 @@ function closeReportModal() {
     document.getElementById('reportStolenModal').setAttribute('inert', '');
 }
 document.getElementById('closeReportModalBtn').addEventListener('click', closeReportModal);
-document.getElementById('cancelReportBtn').addEventListener('click', closeReportModal);
 
 // Close Report Stolen modal when clicking on overlay
 document.getElementById('reportStolenModal').addEventListener('click', function(e) {
@@ -337,7 +336,12 @@ document.getElementById('reportStolenForm').addEventListener('submit', function(
         body: JSON.stringify({ status: 'stolen', last_location: lastLocation }),
     })
     .then(function(response) {
-        if (!response.ok) throw new Error('Failed to report bike as stolen');
+        if (!response.ok) {
+            return response.text().then(function(text) {
+                console.error('Server response:', text);
+                throw new Error('Failed to report bike as stolen');
+            });
+        }
         return response.json();
     })
     .then(function(data) {
