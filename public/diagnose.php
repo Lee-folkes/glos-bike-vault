@@ -18,7 +18,13 @@ try {
     $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
     echo "<p>✅ Kernel created</p>";
 
-    // Try clearing caches
+    // Handle a fake request to fully boot the app (sets facade root)
+    $response = $kernel->handle(
+        $request = Illuminate\Http\Request::create('/diagnose-clear-cache', 'GET')
+    );
+    echo "<p>Response status from test request: " . $response->getStatusCode() . "</p>";
+
+    // Now facades work — clear caches
     Illuminate\Support\Facades\Artisan::call('config:clear');
     echo "<p>✅ Config cache cleared</p>";
 
@@ -30,6 +36,8 @@ try {
 
     Illuminate\Support\Facades\Artisan::call('cache:clear');
     echo "<p>✅ App cache cleared</p>";
+
+    $kernel->terminate($request, $response);
 
     echo "<h3>All caches cleared! Try loading the site again.</h3>";
 } catch (Throwable $e) {
