@@ -193,6 +193,10 @@ document.querySelectorAll('.status-option:not(.action-report)').forEach(function
     });
 });
 
+// Report Stolen: Leaflet map instance and marker
+var reportMap = null;
+var reportMarker = null;
+
 // Open Report Stolen modal
 document.querySelectorAll('.action-report').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
@@ -203,6 +207,21 @@ document.querySelectorAll('.action-report').forEach(function(btn) {
         modal.querySelector('#reportBikeId').value = bikeId;
         modal.querySelector('#reportBikeNickname').textContent = bikeData.nickname || 'this bike';
         modal.querySelector('#reportStolenForm').action = '/bikes/' + bikeId + '/status';
+
+        // Reset location fields and map when opening modal
+        document.getElementById('theftLocation').value = '';
+        document.getElementById('reportLatitude').value = '';
+        document.getElementById('reportLongitude').value = '';
+        document.getElementById('locationFeedback').style.display = 'none';
+        document.getElementById('reportMap').style.display = 'none';
+
+        // Destroy previous map instance if it exists
+        if (reportMap) {
+            reportMap.remove();
+            reportMap = null;
+            reportMarker = null;
+        }
+
         modal.removeAttribute('inert');
     });
 });
@@ -219,3 +238,114 @@ document.getElementById('reportStolenModal').addEventListener('click', function(
     if (e.target === this) closeReportModal();
 });
 
+// Geocode location using OpenStreetMap Nominatim API
+document.getElementById('getLocationBtn').addEventListener('click', function() {
+    var locationInput = document.getElementById('theftLocation');
+    var query = locationInput.value.trim();
+    var feedback = document.getElementById('locationFeedback');
+    var mapContainer = document.getElementById('reportMap');
+
+    if (!query) {
+        feedback.textContent = 'Please enter a location to search.';
+        feedback.style.display = 'block';
+        feedback.style.color = 'red';
+        return;
+    }
+
+    feedback.textContent = 'Searching for location...';
+    feedback.style.display = 'block';
+    feedback.style.color = '';
+
+    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&limit=1', {
+        headers: {
+            'Accept': 'application/json',
+        }
+    })
+    .then(function(response) {
+        if (!response.ok) throw new Error('Geocoding request failed');
+        return response.json();
+    })
+    .then(function(results) {
+        if (!results || results.length === 0) {
+            feedback.textContent = 'Location not found. Please try a different search term.';
+            feedback.style.color = 'red';
+            return;
+        }
+
+        var place = results[0];
+        var lat = parseFloat(place.lat);
+        var lng = parseFloat(place.lon);
+
+        // Store coordinates in hidden fields
+        document.getElementById('reportLatitude').value = lat;
+        document.getElementById('reportLongitude').value = lng;
+
+        // Update feedback with found location
+        feedback.textContent = 'Location found: ' + place.display_name;
+        feedback.style.color = 'green';
+
+        // Show the map container
+        mapContainer.style.display = 'block';
+
+        // Initialize or update the Leaflet map
+        if (!reportMap) {
+            reportMap = L.map('reportMap').setView([lat, lng], 15);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(reportMap);
+            reportMarker = L.marker([lat, lng]).addTo(reportMap);
+        } else {
+            reportMap.setView([lat, lng], 15);
+            reportMarker.setLatLng([lat, lng]);
+        }
+
+        // Fix map rendering in modal (tiles may not load until invalidateSize is called)
+        setTimeout(function() {
+            reportMap.invalidateSize();
+        }, 200);
+    })
+    .catch(function(error) {
+        console.error('Geocoding error:', error);
+        feedback.textContent = 'Failed to search for location. Please try again.';
+        feedback.style.color = 'red';
+    });
+});
+
+// PATCH request to report bike as stolen and update last known location
+document.getElementById('reportStolenForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var bikeId = document.getElementById('reportBikeId').value;
+    var lat = document.getElementById('reportLatitude').value;
+    var lng = document.getElementById('reportLongitude').value;
+    var locationText = document.getElementById('theftLocation').value.trim();
+
+    // Build the last_location string: "lat,lng" if coordinates are available, otherwise the raw text
+    var lastLocation = '';
+    if (lat && lng) {
+        lastLocation = lat + ',' + lng;
+    } else if (locationText) {
+        lastLocation = locationText;
+    }
+
+    fetch('/bikes/' + bikeId + '/status', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({ status: 'stolen', last_location: lastLocation }),
+    })
+    .then(function(response) {
+        if (!response.ok) throw new Error('Failed to report bike as stolen');
+        return response.json();
+    })
+    .then(function(data) {
+        closeReportModal();
+        window.location.reload();
+    })
+    .catch(function(error) {
+        console.error('Error reporting bike as stolen:', error);
+        alert('Failed to report bike as stolen. Please try again.');
+    });
+});

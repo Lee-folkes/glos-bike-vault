@@ -67,14 +67,16 @@ class BikeController extends Controller
         }
 
         $validated = $request->validate([
-            'status' => 'required|string|in:active,stolen,sold',
+            'status'        => 'required|string|in:active,stolen,sold',
+            'last_location' => 'nullable|string|max:255',
         ]);
 
         $bike->update($validated);
 
         return response()->json([
-            'success' => true,
-            'status'  => $bike->status,
+            'success'       => true,
+            'status'        => $bike->status,
+            'last_location' => $bike->last_location,
         ]);
     }
 }    

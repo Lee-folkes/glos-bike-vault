@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @push('styles')
     @vite('resources/css/pages/dashboard.css')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 @endpush
 @push ('scripts')
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     @vite('resources/js/pages/dashboard.js')
 @endpush
 @section('content')
@@ -259,17 +261,15 @@
             <form id="reportStolenForm" method="POST" action="">
                 @csrf
                 @method('PATCH')
-                <!-- TODO Add a form field for user to provide last known location, 
-                 then pass this to openstreetmap geocoding API to get lat/lng coordinates to save with the bike record.
-                 
-                 Also, display a map in the modal showing the location of the theft using leaflet.js..
-                 -->
                  <div class="form-group">
                     <label for="theftLocation">Last Known Location of Bike</label>
-                    <input name="theft_location" type="text" id="theftLocation" placeholder="Enter location">
+                    <input name="theft_location" type="text" id="theftLocation" placeholder="Enter location (e.g. Gloucester, UK)">
                     <button type="button" id="getLocationBtn" class="btn btn-secondary">Add Location</button>
                 </div>
-                 
+                <div id="locationFeedback" style="display:none; margin-bottom: 10px;"></div>
+                <div id="reportMap" style="display:none; height: 250px; margin-bottom: 15px; border-radius: var(--border-radius-base); z-index: 1;"></div>
+                <input type="hidden" id="reportLatitude" name="latitude" value="">
+                <input type="hidden" id="reportLongitude" name="longitude" value="">
                 <button type="submit" class="btn btn-danger form-row-full">Done</button>
             </form>
         </div>

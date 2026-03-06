@@ -442,8 +442,6 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     color: var(--colour-highlight-secondary);
 }
 
-
-
 /* Button styles for the Report Stolen modal */
 #reportStolenModal button{
     background-color: var(--colour-highlight-secondary);
@@ -458,6 +456,17 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
 
 #getLocationBtn {
     padding: var(--spacing-sm);
+}
+
+/* Map container in the Report Stolen modal */
+#reportMap {
+    border: 1px solid var(--colour-light-secondary, #ccc);
+    border-radius: var(--border-radius-base);
+}
+
+#locationFeedback {
+    font-size: 0.9rem;
+    padding: var(--spacing-xs, 4px) 0;
 }
 
 

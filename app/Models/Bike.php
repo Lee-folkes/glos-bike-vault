@@ -24,6 +24,7 @@ class Bike extends Model
         'gender',
         'age_group',
         'status',
+        'last_location',
     ];
     /*
     * Get the user that owns the bike.
