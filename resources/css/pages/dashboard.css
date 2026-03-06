@@ -443,12 +443,12 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
 }
 
 /* Button styles for the Report Stolen modal */
-#reportStolenModal button{
+#reportStolenModal button:not(.modal-close){
     background-color: var(--colour-highlight-secondary);
     border-radius: var(--border-radius-base);
 }
 
-#reportStolenModal button:hover {
+#reportStolenModal button:not(.modal-close):hover {
     background-color: var(--colour-light-primary);
     color: var(--colour-highlight-primary);
     transition: var(--transition-duration) var(--transition-easing);
