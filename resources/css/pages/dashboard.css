@@ -303,6 +303,7 @@ button:hover{
     justify-content: space-between;
     padding-top: var(--spacing-sm);
     border-top: 1px solid rgba(242, 242, 242, 0.1);
+    margin-top: auto;
 }
 
 .bike-card-meta {
