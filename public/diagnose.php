@@ -7,41 +7,30 @@ error_reporting(E_ALL);
 
 echo "<h2>Laravel Diagnostic</h2>";
 
-// Try to boot Laravel and catch any errors
-try {
-    require __DIR__.'/../vendor/autoload.php';
-    echo "<p>✅ Autoloader loaded</p>";
-    
-    $app = require_once __DIR__.'/../bootstrap/app.php';
-    echo "<p>✅ App bootstrapped</p>";
-
-    $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-    echo "<p>✅ Kernel created</p>";
-
-    // Handle a fake request to fully boot the app (sets facade root)
-    $response = $kernel->handle(
-        $request = Illuminate\Http\Request::create('/diagnose-clear-cache', 'GET')
-    );
-    echo "<p>Response status from test request: " . $response->getStatusCode() . "</p>";
-
-    // Now facades work — clear caches
-    Illuminate\Support\Facades\Artisan::call('config:clear');
-    echo "<p>✅ Config cache cleared</p>";
-
-    Illuminate\Support\Facades\Artisan::call('route:clear');
-    echo "<p>✅ Route cache cleared</p>";
-
-    Illuminate\Support\Facades\Artisan::call('view:clear');
-    echo "<p>✅ View cache cleared</p>";
-
-    Illuminate\Support\Facades\Artisan::call('cache:clear');
-    echo "<p>✅ App cache cleared</p>";
-
-    $kernel->terminate($request, $response);
-
-    echo "<h3>All caches cleared! Try loading the site again.</h3>";
-} catch (Throwable $e) {
-    echo "<h3>❌ Error found:</h3>";
-    echo "<pre>" . htmlspecialchars($e->getMessage()) . "</pre>";
-    echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+// Check for maintenance mode file
+$maintenanceFile = __DIR__ . '/../storage/framework/maintenance.php';
+if (file_exists($maintenanceFile)) {
+    echo "<p>⚠️ <strong>Maintenance mode is ACTIVE!</strong> File exists: storage/framework/maintenance.php</p>";
+    unlink($maintenanceFile);
+    echo "<p>✅ Maintenance mode file DELETED. Site should be back up.</p>";
+} else {
+    echo "<p>✅ Not in maintenance mode</p>";
 }
+
+// Check .env file
+$envFile = __DIR__ . '/../.env';
+if (file_exists($envFile)) {
+    echo "<p>✅ .env file exists</p>";
+} else {
+    echo "<p>❌ <strong>.env file is MISSING!</strong> This will cause a 500/503.</p>";
+}
+
+// Check storage directory permissions
+$storagePath = __DIR__ . '/../storage';
+echo "<p>Storage writable: " . (is_writable($storagePath) ? '✅ Yes' : '❌ No') . "</p>";
+echo "<p>Storage/logs writable: " . (is_writable($storagePath . '/logs') ? '✅ Yes' : '❌ No') . "</p>";
+echo "<p>Storage/framework writable: " . (is_writable($storagePath . '/framework') ? '✅ Yes' : '❌ No') . "</p>";
+echo "<p>Storage/framework/views writable: " . (is_writable($storagePath . '/framework/views') ? '✅ Yes' : '❌ No') . "</p>";
+echo "<p>Bootstrap/cache writable: " . (is_writable(__DIR__ . '/../bootstrap/cache') ? '✅ Yes' : '❌ No') . "</p>";
+
+echo "<h3>Done. Try loading the site again.</h3>";
