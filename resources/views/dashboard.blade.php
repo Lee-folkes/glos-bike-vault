@@ -79,7 +79,7 @@
                             <div class="bike-card-status-menu">
                                 <button class="status-option" data-status="active" data-bike-id="{{ $bike->id }}">
                                     <i class="bx bx-check"></i>
-                                    <span>Mark as Active<span>
+                                    <span>Mark as Active</span>
                                 </button>
                                 <button class="status-option action-report" data-status="stolen" data-bike-id="{{ $bike->id }}"
                                     data-bike="{{ json_encode($bike->only(['nickname'])) }}">
