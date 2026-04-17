@@ -29,9 +29,8 @@ class BikeController extends Controller
 
         if ($request->hasFile('bike_image')) {
             $validated['img_path'] = $request->file('bike_image')->store('bikes', 'public');
+            unset($validated['bike_image']);
         }
-
-        unset($validated['bike_image']);
 
         $request->user()->bikes()->create($validated);
 
@@ -68,9 +67,8 @@ class BikeController extends Controller
                 }
 
                 $validated['img_path'] = $request->file('bike_image')->store('bikes', 'public');
+                unset($validated['bike_image']);
             }
-
-            unset($validated['bike_image']);
     
             $bike->update($validated);
     
