@@ -101,6 +101,14 @@
                                 
 
                             <!-- Bike name, type and status display -->
+                            @if($bike->img_path)
+                                <img
+                                    src="{{ asset('storage/' . $bike->img_path) }}"
+                                    alt="{{ $bike->nickname }} image"
+                                    class="bike-card-image"
+                                >
+                            @endif
+
                             <div class="bike-card-header">
                                 <h3 class="bike-card-name">{{ $bike->nickname }}</h3>
                                 <span class="bike-card-type">{{ ucfirst($bike->type) }}</span>
@@ -156,14 +164,14 @@
     </section>
 
  <!-- Register new bike modal -->
-<div class="modal-overlay" id="registerBikeModal" aria-labelledby="registerBikeModalLabel" inert>
+<div class="modal-overlay" id="registerBikeModal" aria-labelledby="registerBikeModalLabel" inert hidden>
     <div class="modal-dialog">
         <div class="modal-header">
             <h2 class="modal-title" id="registerBikeModalLabel">Register New Bike</h2>
             <button type="button" class="modal-close" id="closeModalBtn" aria-label="Close">&times;</button>
         </div>
         <div class="modal-body">
-            <form id="registerBikeForm" method="POST" action="{{ route('bikes.store') }}">
+            <form id="registerBikeForm" method="POST" action="{{ route('bikes.store') }}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" id="formMethod" value="POST">
                 <div class="form-group form-row-full">
@@ -242,6 +250,11 @@
                     </select>
                 </div>
 
+                <div class="form-group form-row-full">
+                    <label for="bikeImage">Bike Image (optional)</label>
+                    <input name="bike_image" type="file" id="bikeImage" accept="image/jpeg,image/png,image/webp">
+                </div>
+
                 <button type="submit" class="form-row-full" id="BikeSubmitBtn">Register Bike</button>
             </form>
         </div>
@@ -250,7 +263,7 @@
 </div>
 
 <!-- Report Stolen bike modal -->
-<div class="modal-overlay" id="reportStolenModal" aria-labelledby="reportStolenModalLabel" inert>
+<div class="modal-overlay" id="reportStolenModal" aria-labelledby="reportStolenModalLabel" inert hidden>
     <div class="modal-dialog">
         <div class="modal-header"> 
             <h2 class="modal-title" id="reportStolenModalLabel">Report <strong id="reportBikeNickname">this bike</strong> as Stolen</h2>

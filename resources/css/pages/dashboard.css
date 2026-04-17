@@ -135,6 +135,14 @@ button:hover{
     box-shadow: var(--shadow-lg);
 }
 
+.bike-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--border-radius-base);
+    border: 1px solid rgba(242, 242, 242, 0.14);
+}
+
 .bike-card-header {
     display: flex;
     align-items: center;
@@ -330,6 +338,10 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     display: none;
 }
 
+.modal-overlay[hidden] {
+    display: none !important;
+}
+
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -415,6 +427,10 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     font-size: var(--font-size-base);
     color: var(--colour-dark-primary);
     width: 100%;
+}
+
+.form-group input[type="file"] {
+    padding: 0.4rem;
 }
 
 .modal-body button[type="submit"] {

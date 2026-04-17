@@ -24,6 +24,7 @@ class Bike extends Model
         'gender',
         'age_group',
         'status',
+        'img_path',
         'last_location',
     ];
     /*

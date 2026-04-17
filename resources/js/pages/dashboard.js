@@ -27,6 +27,7 @@ function openRegisterModal() {
     formMethod.value = 'POST';
     form.reset();
     modal.removeAttribute('inert');
+    modal.removeAttribute('hidden');
 }
 
 /**
@@ -38,6 +39,11 @@ function openEditModal(bikeId, bikeData) {
     form.action = storeUrl + '/' + bikeId;   // /bikes/{id}
     formMethod.value = 'PUT';
 
+    const bikeImageInput = form.querySelector('[name="bike_image"]');
+    if (bikeImageInput) {
+        bikeImageInput.value = '';
+    }
+
     // Populate each form field with the bike's current data
     bikeFields.forEach(function(field) {
         const input = form.querySelector('[name="' + field + '"]');
@@ -47,10 +53,12 @@ function openEditModal(bikeId, bikeData) {
     });
 
     modal.removeAttribute('inert');
+    modal.removeAttribute('hidden');
 }
 
 function closeModal() {
     modal.setAttribute('inert', '');
+    modal.setAttribute('hidden', '');
 }
 
 // "Register New Bike" button
@@ -223,12 +231,15 @@ document.querySelectorAll('.action-report').forEach(function(btn) {
         }
 
         modal.removeAttribute('inert');
+        modal.removeAttribute('hidden');
     });
 });
 
 // Close Report Stolen modal
 function closeReportModal() {
-    document.getElementById('reportStolenModal').setAttribute('inert', '');
+    const reportModal = document.getElementById('reportStolenModal');
+    reportModal.setAttribute('inert', '');
+    reportModal.setAttribute('hidden', '');
 }
 document.getElementById('closeReportModalBtn').addEventListener('click', closeReportModal);
 

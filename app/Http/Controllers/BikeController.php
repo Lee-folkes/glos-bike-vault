@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bike;
+use Illuminate\Support\Facades\Storage;
 
 class BikeController extends Controller
 {
@@ -23,7 +24,14 @@ class BikeController extends Controller
             'suspension'  => 'required|string|max:255',
             'gender'      => 'required|string|max:255',
             'age_group'   => 'required|string|max:255',
+            'bike_image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
+
+        if ($request->hasFile('bike_image')) {
+            $validated['img_path'] = $request->file('bike_image')->store('bikes', 'public');
+        }
+
+        unset($validated['bike_image']);
 
         $request->user()->bikes()->create($validated);
 
@@ -51,7 +59,18 @@ class BikeController extends Controller
                 'suspension'  => 'required|string|max:255',
                 'gender'      => 'required|string|max:255',
                 'age_group'   => 'required|string|max:255',
+                'bike_image'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             ]);
+
+            if ($request->hasFile('bike_image')) {
+                if ($bike->img_path) {
+                    Storage::disk('public')->delete($bike->img_path);
+                }
+
+                $validated['img_path'] = $request->file('bike_image')->store('bikes', 'public');
+            }
+
+            unset($validated['bike_image']);
     
             $bike->update($validated);
     
