@@ -170,22 +170,22 @@ button:hover{
 }
 
 .status-active {
-    background-color: green;
+    background-color: var(--status-active);
     color: var(--colour-light-primary);
 }
 
 .status-stolen {
-    background-color: red;
+    background-color: var(--status-stolen);
     color: var(--colour-light-primary);
 }
 
 .status-sold {
-    background-color: gray;
+    background-color: var(--status-sold);
     color: var(--colour-light-primary);
 }
 
 .status-recovered {
-    background-color: blue;
+    background-color: var(--status-recovered);
     color: var(--colour-light-primary);
 }
 

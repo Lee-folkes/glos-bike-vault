@@ -32,6 +32,12 @@ body{
     --colour-highlight-primary: #385C73;
     --colour-highlight-secondary: #A2DCF2;
 
+    /* Status Colours */
+    --status-active: #28a745;
+    --status-stolen: #dc3545;
+    --status-sold: #6c757d;
+    --status-recovered: #17a2b8;
+
     /* Font Families */
     --font-primary: 'Outfit', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-secondary: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
