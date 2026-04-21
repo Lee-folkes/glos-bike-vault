@@ -10,6 +10,8 @@ Route::get('/', function () {
 
 // Login and Register views are handled by Fortify (see FortifyServiceProvider)
 
+// ** Standard user routes **
+
 // Show the dashboard (protected route)
 Route::get('/dashboard', function () {
     $bikes = auth()->user()->bikes()->latest()->get();
@@ -61,3 +63,7 @@ Route::patch('/bikes/{bike}/status', [BikeController::class, 'updateStatus'])
     ->name('bikes.updateStatus');
 
 
+// ** Admin routes (protected by admin middleware) **
+Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->group(function () {
+    // Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});

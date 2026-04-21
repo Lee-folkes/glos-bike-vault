@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use App\Enums\UserRole;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,5 +24,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
+        // Gates for role-based access control
+        // Define an 'access-admin' gate
+        Gate::define('access-admin', function (User $user) {
+            return $user->hasRole(UserRole::ADMIN);
+        });
+
     }
 }
