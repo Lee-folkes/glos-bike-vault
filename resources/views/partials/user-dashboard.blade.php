@@ -50,10 +50,16 @@
                                     <i class="bx bx-edit-alt"></i>
                                     <span>Edit</span>
                                 </button>
+                                @if($bike->status !== 'stolen')
+                                <button class="action-btn action-status" title="Change Status" data-bike-id="{{ $bike->id }}" disabled>
+                                    <i class="bx bx-alert-triangle"></i>
+                                    <span>Status</span>
+                                @else
                                 <button class="action-btn action-status" title="Change Status" data-bike-id="{{ $bike->id }}">
                                     <i class="bx bx-alert-triangle"></i>
                                     <span>Status</span>
                                 </button>
+                                @endif
                                 <button class="action-btn action-delete" title="Delete" data-bike-id="{{ $bike->id }}">
                                     <i class="bx bx-trash"></i>
                                     <span>Delete</span>
@@ -135,6 +141,16 @@
                                     <span class="detail-label">Suspension</span>
                                     <span class="detail-value">{{ ucfirst($bike->suspension) }}</span>
                                 </div>
+                                @if($bike->status === 'stolen')
+                                <div class="bike-card-detail">
+                                    <span class="detail-label">Stolen At</span>
+                                    <span class="detail-value">{{ $bike->stolen_at ? $bike->stolen_at->format('d M Y H:i') : 'Unknown' }}</span>
+                                </div>
+                                <div class="bike-card-detail">
+                                    <span class="detail-label">Last Location</span>
+                                    <span class="detail-value">{{ $bike->last_location ?? 'Unknown' }}</span>
+                                </div>
+                                @endif
                             </div>
 
                             <!-- Footer with gender, age group and registration date -->

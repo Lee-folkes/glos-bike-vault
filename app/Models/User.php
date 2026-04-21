@@ -65,6 +65,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bike::class);
     }
-    
 
+
+    /**
+     * Get all stolen bikes in the system.
+     * Only accessible to users with the ADMIN role.
+     */
+    public function getAllStolenBikes()
+    {
+        if (! $this->hasRole(UserRole::ADMIN)) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return Bike::where('status', 'stolen')->latest('stolen_at')->get();
+    }
 }

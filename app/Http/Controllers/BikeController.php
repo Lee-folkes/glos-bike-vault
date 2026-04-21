@@ -88,12 +88,20 @@ class BikeController extends Controller
             'last_location' => 'nullable|string|max:255',
         ]);
 
+        if ($validated['status'] === 'stolen') {
+            $validated['stolen_at'] = now();
+        } else {
+            $validated['stolen_at'] = null;
+            $validated['last_location'] = null;
+        }
+
         $bike->update($validated);
 
         return response()->json([
             'success'       => true,
             'status'        => $bike->status,
             'last_location' => $bike->last_location,
+            'stolen_at'     => $bike->stolen_at ? $bike->stolen_at->format('d M Y H:i') : null,
         ]);
     }
 }    

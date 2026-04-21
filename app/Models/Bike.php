@@ -26,6 +26,11 @@ class Bike extends Model
         'status',
         'img_path',
         'last_location',
+        'stolen_at',
+    ];
+
+    protected $casts = [
+        'stolen_at' => 'datetime',
     ];
     /*
     * Get the user that owns the bike.
