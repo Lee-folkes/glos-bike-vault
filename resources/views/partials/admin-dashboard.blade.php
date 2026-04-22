@@ -1,3 +1,9 @@
+  <!-- Custom styles for the admin dashboard -->
+  @push('styles')
+    @vite('resources/css/pages/admin-dashboard.css')
+@endpush
+    
+  
   <!-- Toolbar Section: Search, filter and sort options for bike cards -->
     <section class="toolbar-section">
             <div class="container toolbar-container">
@@ -29,7 +35,18 @@
                     <p>Click <strong>+ Register New Bike</strong> to get started.</p>
                 </div>
 
-            <!-- Else loop through all bikes with a stolen or recovered status -->
+            <!-- Else loop through the stolen bikes array and populate a list view of results -->
+            @else
+                <div class="bikes-list">
+                    @foreach($stolenBikes as $bike)
+                        <div class="bike-card">
+                            <!--- Need to reuse bike-card-xx styles here for text elements-->
+                            <h3>{{ $bike->nickname }}</h3>
+                            <p>Status: {{ $bike->status }}</p>
+                            <p>Stolen Date: {{ $bike->stolen_at ? $bike->stolen_at->format('M d, Y') : 'N/A' }}</p>
+                            <p>Location: {{ $bike->last_location }}</p>
+                        </div>
+                    @endforeach
            @endif
 
                

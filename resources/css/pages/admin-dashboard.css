@@ -1,0 +1,14 @@
+/* These styles are for the admin dashboard, they provide 
+specific styling, above that provided in dashboard.css */
+
+.bikes-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+/* Override the bike card layout for the admin dashboard */
+.bike-card {
+    flex-direction: row;
+}
+
