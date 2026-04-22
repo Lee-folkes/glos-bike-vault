@@ -76,13 +76,17 @@ class BikeController extends Controller
         }
 
     // Method to update the status of a bike
+    //Can this be updated to allow admins to update the status of any bike, but users can only update their own bikes?
     public function updateStatus(Request $request, Bike $bike)
     {
-        // Ensure the authenticated user owns this bike
+        // Ensure the authenticated user owns this bike or has the admin role
         if ($bike->user_id !== $request->user()->id) {
-            abort(403);
+            // Check if the user is an admin
+            if (!$request->user()->is_admin) {
+                abort(403);
+            }
         }
-
+        
         $validated = $request->validate([
             'status'        => 'required|string|in:active,stolen,sold',
             'last_location' => 'nullable|string|max:255',

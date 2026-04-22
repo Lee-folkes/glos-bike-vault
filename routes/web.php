@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BikeController;
+use App\Enums\UserRole;
 
 // Show the landing page
 Route::get('/', function () {
@@ -14,8 +15,21 @@ Route::get('/', function () {
 
 // Show the dashboard (protected route)
 Route::get('/dashboard', function () {
+    $user = auth()->user();
+    $stolenBikes = collect();
+
+    if ($user && $user->hasrole(UserRole::ADMIN)) {
+        // If user has the admin role, call to function that returns
+        // all stolen or recovered bikes in the DB
+        $stolenBikes = $user->getAllStolenBikes();
+        return view('dashboard', ['stolenBikes' => $stolenBikes]);
+    }
+    
+    else{//If standard user just return that users bikes
     $bikes = auth()->user()->bikes()->latest()->get();
     return view('dashboard', compact('bikes'));
+    }
+
 })->middleware('auth')->name('dashboard');
 
 // Show the user profile (protected route)

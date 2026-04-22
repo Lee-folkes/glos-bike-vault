@@ -23,7 +23,7 @@
             </div>
 
             <!-- If no bikes are registered, show empty state message -->
-            @if($bikes->isEmpty())
+            @if($stolenBikes->isEmpty())
                 <div class="bikes-empty">
                     <p>No bikes found matching your criteria.</p>
                     <p>Click <strong>+ Register New Bike</strong> to get started.</p>
