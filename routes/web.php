@@ -20,7 +20,7 @@ Route::get('/dashboard', function () {
 
     if ($user && $user->hasrole(UserRole::ADMIN)) {
         // If user has the admin role, call to function that returns
-        // all stolen or recovered bikes in the DB
+        // all stolen or recovered bikes & all users in the DB
         $stolenBikes = $user->getAllStolenBikes();
         return view('dashboard', ['stolenBikes' => $stolenBikes]);
     }

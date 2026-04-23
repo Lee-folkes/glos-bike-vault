@@ -1,14 +1,56 @@
 /* These styles are for the admin dashboard, they provide 
 specific styling, above that provided in dashboard.css */
 
-.bikes-section {
+
+/* Container for the rows */
+.bikes-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: 0.5rem; /* Tighter gap for a table feel */
+}
+
+/* Header row for the table */
+.bike-table-header {
+    display: grid;
+    /* Define fixed and flexible columns to align your data */
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1.5fr 1fr; 
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-lg); /* Reduce vertical padding for a tighter look */
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--colour-light-primary);
+    opacity: 0.7;
+    text-transform: uppercase;
 }
 
 /* Override the bike card layout for the admin dashboard */
-.bike-card {
-    flex-direction: row;
+.bikes-list .bike-card {
+    display: grid;
+    /* Make sure this matches the header's column widths perfectly */
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1.5fr 1fr; 
+    gap: var(--spacing-sm);
+    align-items: center; 
+    padding: var(--spacing-sm) var(--spacing-lg); /* Reduce vertical padding to look more like a table row */
 }
 
+.admin-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: left;
+}
+
+.action-btn {
+    padding: 0;
+    transition: none;
+
+}
+
+.action-btn:hover {
+    background-color: transparent;
+}
+
+.bike-card-image{
+    width: 50%;
+}

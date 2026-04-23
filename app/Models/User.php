@@ -77,6 +77,9 @@ class User extends Authenticatable
             abort(403, 'Unauthorized action.');
         }
 
-        return Bike::where('status', 'stolen')->latest('stolen_at')->get();
+        return Bike::with('user')->where('status', 'stolen')->latest('stolen_at')->get();
     }
+
+    
+
 }
