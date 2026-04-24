@@ -36,6 +36,7 @@ body{
     --status-active: #28a745;
     --status-stolen: #dc3545;
     --status-sold: #6c757d;
+    --status-investigating: #ffc107;
     --status-recovered: #17a2b8;
 
     /* Font Families */

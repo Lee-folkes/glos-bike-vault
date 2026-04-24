@@ -80,7 +80,9 @@
                                     <i class="bx bx-info-circle"></i>
                                     <span>Info</span>
                                 </button>
-                                <button class="action-btn action-map" title="View Map" data-bike-id="{{ $bike->id }}">
+                                <button class="action-btn action-map" title="View Map" data-bike-id="{{ $bike->id }}"
+                                    data-bike-id="{{ $bike->id }}"
+                                    data-bike="{{ json_encode($bike) }}">
                                     <i class="bx bx-map"></i>
                                     <span>Map</span>
                                 </button>
@@ -104,8 +106,6 @@
             
             <img id="infoBikeImage" src="" alt="Bike Image" class="bike-card-image" style="display: none;">
 
-            
-
             <div class="bike-card-body">
                 <div class="bike-card-detail"><span class="detail-label">Brand</span><span class="detail-value" id="infoBikeBrand"></span></div>
                 <div class="bike-card-detail"><span class="detail-label">Model</span><span class="detail-value" id="infoBikeModel"></span></div>
@@ -125,5 +125,19 @@
         </div>
     </div>
 </div>
-    
+
+<!-- Admin Map Modal -->
+<div class="modal-overlay" id="adminMapModal" aria-labelledby="mapModalLabel" inert hidden>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h3 class="bike-card-name" id="mapModalLabel">Last Known Location</h3>
+            <button type="button" class="modal-close" id="closeMapModalBtn" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p id="adminMapFallbackText" style="display: none;"></p>
+            <!-- Leaflet Map Container -->
+            <div id="adminMapContainer" style="height: 300px; width: 100%; display: none;"></div>
+        </div>
+    </div>
+</div>
 

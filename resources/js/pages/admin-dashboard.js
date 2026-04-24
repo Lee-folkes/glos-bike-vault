@@ -55,4 +55,67 @@ document.addEventListener('DOMContentLoaded', () => {
         infoModal.hidden = true;
         infoModal.setAttribute('inert', '');
     });
+
+    // Logic for map button
+
+
+    const mapButtons = document.querySelectorAll('.action-map');
+    const adminMapModal = document.getElementById('adminMapModal');
+    const closeMapBtn = document.getElementById('closeMapModalBtn');
+    const mapFallbackText = document.getElementById('adminMapFallbackText');
+    const mapContainer = document.getElementById('adminMapContainer');
+    
+    let adminMap = null;
+    let adminMarker = null;
+
+    mapButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const bike = JSON.parse(this.getAttribute('data-bike'));
+            const locationStr = bike.last_location || '';
+            
+            adminMapModal.hidden = false;
+            adminMapModal.removeAttribute('inert');
+
+            // Reset view
+            mapFallbackText.style.display = 'none';
+            mapContainer.style.display = 'none';
+
+            // Clean up previous map instance
+            if (adminMap) {
+                adminMap.remove();
+                adminMap = null;
+            }
+
+            // Check if last_location looks like "lat,lng" coordinates
+            const coords = locationStr.split(',');
+            if (coords.length === 2 && !isNaN(parseFloat(coords[0])) && !isNaN(parseFloat(coords[1]))) {
+                const lat = parseFloat(coords[0]);
+                const lng = parseFloat(coords[1]);
+
+                mapContainer.style.display = 'block';
+
+                adminMap = L.map('adminMapContainer').setView([lat, lng], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(adminMap);
+                
+                adminMarker = L.marker([lat, lng]).addTo(adminMap);
+
+                // Fix loading issue inside modal (from dashboard.js)
+                setTimeout(() => {
+                    adminMap.invalidateSize();
+                }, 200);
+
+            } else {
+                // Not coordinates, just display the raw text (or "Unknown")
+                mapFallbackText.textContent = locationStr ? `Location registered as: ${locationStr}` : 'Location unknown.';
+                mapFallbackText.style.display = 'block';
+            }
+        });
+    });
+
+    closeMapBtn.addEventListener('click', () => {
+        adminMapModal.hidden = true;
+        adminMapModal.setAttribute('inert', '');
+    });
 });

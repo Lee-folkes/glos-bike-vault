@@ -40,8 +40,7 @@
                 <div class="bikes-grid">
                     @foreach($bikes as $bike)
                         <div class="bike-card">
-
-                            <!--Action buttons for edit, status change, and delete (only shown on hover) -->
+                            
                             <!-- TODO Add accessible labels and keyboard support for these buttons -->
                             <div class="bike-card-actions">
                                 <button class="action-btn action-edit" title="Edit" 
