@@ -81,4 +81,6 @@ Route::patch('/bikes/{bike}/status', [BikeController::class, 'updateStatus'])
 // ** Admin routes (protected by admin middleware) **
 Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/create-admin', [AdminController::class, 'createAdmin'])->name('admin.create-admin');
+    Route::post('/create-admin', [AdminController::class, 'storeAdmin'])->name('admin.store-admin');
 });

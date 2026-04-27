@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Bike;
+use App\Models\User;
+use App\Enums\UserRole;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -37,5 +40,28 @@ class AdminController extends Controller
             ->withQueryString();
 
         return view('dashboard', compact('stolenBikes'));
+    }
+
+    public function createAdmin()
+    {
+        return view('admin.create-admin');
+    }
+
+    public function storeAdmin(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => UserRole::ADMIN,
+        ]);
+
+        return redirect()->route('admin.dashboard')->with('status', 'Admin user created successfully.');
     }
 }
