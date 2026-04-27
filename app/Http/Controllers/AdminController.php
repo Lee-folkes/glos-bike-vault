@@ -19,6 +19,9 @@ class AdminController extends Controller
                 
                 if ($request->filled('status')) {
                     $builder->where('status', $request->input('status'));
+                } else {
+                    // Restrict default view to only stolen and recovered bikes
+                    $builder->whereIn('status', ['stolen', 'recovered']);
                 }
 
                 if ($request->filled('date_stolen')) {
