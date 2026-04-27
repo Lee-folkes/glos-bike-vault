@@ -8,6 +8,15 @@
       "app.css"
     ]
   },
+  "resources/css/pages/admin-dashboard.css": {
+    "file": "assets/admin-dashboard-6-r32VLz.css",
+    "src": "resources/css/pages/admin-dashboard.css",
+    "isEntry": true,
+    "name": "admin-dashboard",
+    "names": [
+      "admin-dashboard.css"
+    ]
+  },
   "resources/css/pages/dashboard.css": {
     "file": "assets/dashboard-CqnYRwwD.css",
     "src": "resources/css/pages/dashboard.css",
@@ -30,6 +39,12 @@
     "file": "assets/app-DIuewKhF.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/pages/admin-dashboard.js": {
+    "file": "assets/admin-dashboard-CjbXR4Cb.js",
+    "name": "admin-dashboard",
+    "src": "resources/js/pages/admin-dashboard.js",
     "isEntry": true
   },
   "resources/js/pages/dashboard.js": {

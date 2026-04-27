@@ -14,6 +14,7 @@ export default defineConfig({
                  'resources/css/pages/admin-dashboard.css',
                  //Page specific js
                  'resources/js/pages/dashboard.js',
+                 'resources/js/pages/admin-dashboard.js',
                 ],
             refresh: true,
         }),
