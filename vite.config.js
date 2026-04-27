@@ -11,6 +11,7 @@ export default defineConfig({
                  //Page specific css
                  'resources/css/pages/login_register.css',
                  'resources/css/pages/dashboard.css',
+                 'resources/css/pages/admin-dashboard.css',
                  //Page specific js
                  'resources/js/pages/dashboard.js',
                 ],
