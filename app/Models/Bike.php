@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Scout\Searchable;
 
 class Bike extends Model
 {
     use HasFactory;
+    use Searchable;
 
     protected $fillable = [
         'user_id',
@@ -40,4 +42,16 @@ class Bike extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /* Override the toSearchableArray method to specify which attributes should be indexed by Scout.
+     * In this case, we only want to index the MPN for searching.
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'mpn' => $this->mpn,
+        ];
+    }
+
+
 }

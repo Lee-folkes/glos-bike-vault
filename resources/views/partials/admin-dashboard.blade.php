@@ -10,21 +10,41 @@
     
   
   <!-- Toolbar Section: Search, filter and sort options for bike cards -->
-    <section class="toolbar-section">
-            <div class="container toolbar-container">
-                <div class="search-group">
-                    <input type="text" class="search-input" placeholder="Search bikes...">
-                </div>
+    <!-- Toolbar Section: Search, filter and sort options for bike cards -->
+<section class="toolbar-section">
+    <div class="container">
+        <!-- Wrap inputs in a GET form -->
+        <form method="GET" action="{{ route('admin.dashboard') }}" class="toolbar-container">
             
-                <input type="date" class="filter-select" name="date_stolen" title="Filter by date stolen" aria-label="Filter by date stolen">
-
-                <select class="filter-select">
-                    <option value="newest">Sort: Newest</option>
-                    <option value="oldest">Sort: Oldest</option>
-                </select>
-
+            <div class="search-group">
+                <input type="text" name="search" class="search-input" placeholder="Search by MPN..." value="{{ request('search') }}">
             </div>
-    </section>
+            
+            <!-- Status Filter -->
+            <select name="status" class="filter-select" aria-label="Filter by status">
+                <option value="">All Statuses</option>
+                <option value="stolen" @selected(request('status') == 'stolen')>Stolen</option>
+                <option value="recovered" @selected(request('status') == 'recovered')>Recovered</option>
+            </select>
+
+            <!-- Date Filter -->
+            <input type="date" name="date_stolen" class="filter-select" title="Filter by date stolen" aria-label="Filter by date stolen" value="{{ request('date_stolen') }}">
+
+            <!-- Sort By -->
+            <select name="sort" class="filter-select" aria-label="Sort by date">
+                <option value="newest" @selected(request('sort', 'newest') == 'newest')>Sort: Newest</option>
+                <option value="oldest" @selected(request('sort') == 'oldest')>Sort: Oldest</option>
+            </select>
+
+            <button type="submit" class="status-option" style="width: auto;">Apply</button>
+            
+            <!-- Clear Button visible only if filters are applied -->
+            @if(request()->anyFilled(['search', 'status', 'date_stolen']))
+                <button type="button" class="status-option status-option-outline" style="width: auto;" onclick="window.location.href='{{ route('admin.dashboard') }}'">Clear</button>
+            @endif
+        </form>
+    </div>
+</section>
 
 <!-- Bike list Section -->
     <section class="bikes-section">

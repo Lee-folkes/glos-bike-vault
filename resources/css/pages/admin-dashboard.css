@@ -68,3 +68,16 @@ to be more consistant for the table layout */
 .bike-card-image{
     width: 50%;
 }
+
+/* Inverted Clear Filter Button */
+.status-option-outline {
+    background-color: transparent;
+    border: 1px solid var(--colour-highlight-secondary);
+    color: var(--colour-highlight-secondary);
+    transition: var(--transition-duration) var(--transition-easing);
+}
+
+.status-option-outline:hover {
+    background-color: var(--colour-highlight-secondary);
+    color: var(--colour-dark-primary);
+}

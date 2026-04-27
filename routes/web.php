@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BikeController;
 use App\Enums\UserRole;
+use App\Http\Controllers\AdminController;
 
 // Show the landing page
 Route::get('/', function () {
@@ -79,5 +80,5 @@ Route::patch('/bikes/{bike}/status', [BikeController::class, 'updateStatus'])
 
 // ** Admin routes (protected by admin middleware) **
 Route::middleware(['auth', 'can:access-admin'])->prefix('admin')->group(function () {
-    // Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin-dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 });
