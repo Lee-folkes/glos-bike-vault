@@ -60,8 +60,13 @@
                             <div class="detail-value">
                                 {{ $bike->mpn ?? 'N/A' }}
                             </div>
-                            <div>
+                            <div class="status-group">
                                 <span class="bike-card-type status-{{ $bike->status }}">{{ ucfirst($bike->status) }}</span>
+                                <button class="action-btn action-status" title="Change Status" 
+                                data-bike-id="{{ $bike->id }}"
+                                data-bike="{{ json_encode($bike) }}">
+                                    <i class="bx bx-edit"></i>
+                                </button>
                             </div>
                             <div class="detail-value">
                                 {{ $bike->stolen_at ? $bike->stolen_at->format('M d, Y') : 'N/A' }}
@@ -70,10 +75,6 @@
                                 {{ $bike->last_location ?? 'Unknown' }}
                             </div>
                             <div class="admin-actions">
-                                <button class="action-btn action-status" title="Change Status" data-bike-id="{{ $bike->id }}">
-                                    <i class="bx bx-alert-triangle"></i>
-                                <span>Status</span>
-                                </button>
                                 <button class="action-btn action-info" title="View Info" 
                                     data-bike-id="{{ $bike->id }}"
                                     data-bike="{{ json_encode($bike) }}">
@@ -118,7 +119,6 @@
                 <div class="bike-card-detail"><span class="detail-label">Stolen At</span><span class="detail-value" id="infoBikeStolenAt"></span></div>
                 <div class="bike-card-detail"><span class="detail-label">Last Location</span><span class="detail-value" id="infoBikeLocation"></span></div>
             </div>
-
             <div class="bike-card-footer">
                 <span class="bike-card-meta" id="infoBikeMeta"></span>
             </div>
@@ -140,4 +140,27 @@
         </div>
     </div>
 </div>
+
+<!-- Admin Status Update Modal -->
+<div class="modal-overlay" id="statusUpdateModal" aria-labelledby="statusUpdateModalLabel" inert hidden>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h2 class="modal-title" id="statusUpdateModalLabel">Update Bike Status</h2>
+            <button type="button" class="modal-close" id="closeStatusModalBtn" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body bike-card-status-menu" style="position: static; opacity: 1; visibility: visible; border-radius: 0; background: none; backdrop-filter: none; gap: var(--spacing-sm);">
+            
+            <button class="status-option" data-status="stolen" style="width: 100%;">
+                <i class="bx bx-x"></i>
+                <span>Mark as Stolen</span>
+            </button>
+            
+            <button class="status-option" data-status="recovered" style="width: 100%;">
+                <i class="bx bx-check-shield"></i>
+                <span>Mark as Recovered</span>
+            </button>
+        </div>
+    </div>
+</div>
+
 

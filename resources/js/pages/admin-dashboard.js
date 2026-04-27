@@ -118,4 +118,70 @@ document.addEventListener('DOMContentLoaded', () => {
         adminMapModal.hidden = true;
         adminMapModal.setAttribute('inert', '');
     });
+
+    // --- Status Update Modal Logic ---
+    const statusButtons = document.querySelectorAll('.action-status');
+    const statusUpdateModal = document.getElementById('statusUpdateModal');
+    const closeStatusModalBtn = document.getElementById('closeStatusModalBtn');
+    const statusOptions = document.querySelectorAll('.status-option');
+    let currentBikeIdForStatus = null;
+
+    // Open Modal
+    statusButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            currentBikeIdForStatus = this.getAttribute('data-bike-id');
+            statusUpdateModal.hidden = false;
+            statusUpdateModal.removeAttribute('inert');
+        });
+    });
+
+    // Close Modal
+    closeStatusModalBtn.addEventListener('click', () => {
+        statusUpdateModal.hidden = true;
+        statusUpdateModal.setAttribute('inert', '');
+        currentBikeIdForStatus = null;
+    });
+
+    // Handle Status Update
+    statusOptions.forEach(option => {
+        option.addEventListener('click', async function() {
+            if (!currentBikeIdForStatus) return;
+            
+            const newStatus = this.getAttribute('data-status');
+            const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
+            const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
+            
+            try {
+                // Disable options during loading
+                statusOptions.forEach(opt => opt.disabled = true);
+                
+                const response = await fetch(`/bikes/${currentBikeIdForStatus}/status`, {
+                    method: 'PATCH', // Assumes route matches Route::patch('/bikes/{bike}/status')
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (response.ok) {
+                    // Quickest way to reflect changes and refresh lists: reload page
+                    // Alternatively, update DOM elements manually if no reload is preferred
+                    window.location.reload();
+                } else {
+                    console.error('Failed to update status', await response.text());
+                    alert('Failed to update status. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('An error occurred. Please check your connection and try again.');
+            } finally {
+                statusOptions.forEach(opt => opt.disabled = false);
+                statusUpdateModal.hidden = true;
+                statusUpdateModal.setAttribute('inert', '');
+                currentBikeIdForStatus = null;
+            }
+        });
+    });
 });

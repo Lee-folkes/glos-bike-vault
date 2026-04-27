@@ -51,6 +51,20 @@ specific styling, above that provided in dashboard.css */
     background-color: transparent;
 }
 
+.status-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/*Override the status badge styles for the admin dashboard 
+to be more consistant for the table layout */
+.status-stolen, .status-recovered {
+    width: 7em;
+    text-align: center;
+    
+}
+
 .bike-card-image{
     width: 50%;
 }

@@ -82,13 +82,13 @@ class BikeController extends Controller
         // Ensure the authenticated user owns this bike or has the admin role
         if ($bike->user_id !== $request->user()->id) {
             // Check if the user is an admin
-            if (!$request->user()->is_admin) {
+            if (!$request->user()->hasRole(\App\Enums\UserRole::ADMIN)) {
                 abort(403);
             }
         }
         
         $validated = $request->validate([
-            'status'        => 'required|string|in:active,stolen,sold',
+            'status'        => 'required|string|in:active,stolen,sold,recovered',
             'last_location' => 'nullable|string|max:255',
         ]);
 
