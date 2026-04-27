@@ -82,11 +82,13 @@ button:hover{
 /* --- Bike Cards Section --- */
 
 .bikes-section {
+
     padding: 0 0 var(--spacing-xl);
 }
 
 .bikes-section-header {
     display: flex;
+    justify-content: space-between;
     margin-bottom: var(--spacing-lg);
 }
 
