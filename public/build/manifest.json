@@ -18,7 +18,7 @@
     ]
   },
   "resources/css/pages/dashboard.css": {
-    "file": "assets/dashboard-CqnYRwwD.css",
+    "file": "assets/dashboard-0WdS7R1W.css",
     "src": "resources/css/pages/dashboard.css",
     "isEntry": true,
     "name": "dashboard",
@@ -27,7 +27,7 @@
     ]
   },
   "resources/css/pages/login_register.css": {
-    "file": "assets/login_register-BepZ0YKL.css",
+    "file": "assets/login_register-B2Qe0J1o.css",
     "src": "resources/css/pages/login_register.css",
     "isEntry": true,
     "name": "login_register",
@@ -48,7 +48,7 @@
     "isEntry": true
   },
   "resources/js/pages/dashboard.js": {
-    "file": "assets/dashboard-qUTBLKxB.js",
+    "file": "assets/dashboard-Cj5iCh3l.js",
     "name": "dashboard",
     "src": "resources/js/pages/dashboard.js",
     "isEntry": true

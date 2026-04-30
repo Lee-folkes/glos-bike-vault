@@ -12,7 +12,7 @@ specific styling, above that provided in dashboard.css */
 /* Header row for the table */
 .bike-table-header {
     display: grid;
-    /* Define fixed and flexible columns to align your data */
+    /* Define fixed and flexible columns to align data */
     grid-template-columns: 1.5fr 1fr 1fr 1.5fr 1.5fr 1fr; 
     gap: var(--spacing-sm);
     padding: 0 var(--spacing-lg); /* Reduce vertical padding for a tighter look */

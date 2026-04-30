@@ -1,4 +1,12 @@
 <?php
+/**
+ * Represents an authenticated user in the application.
+ * 
+ * This model extends standard Laravel authentication features (including 
+ * two-factor auth support) and handles user authorisation via a Role enum. 
+ * It defines the one-to-many relationship with owned Bikes and provides 
+ * admin-specific capabilities for retrieving platform-wide stolen bike data.
+ */
 
 namespace App\Models;
 
@@ -79,7 +87,5 @@ class User extends Authenticatable
 
         return Bike::with('user')->whereIn('status', ['stolen', 'recovered'])->latest('stolen_at')->get();
     }
-
-    
 
 }

@@ -1,3 +1,13 @@
+/*
+ * Dashboard Stylesheet
+ * 
+ * Provides layout and styling for the main dashboard interface in Glos Bike Vault.
+ * This includes the top toolbar (search & filter), the responsive grid of bike 
+ * cards, hover action menus for individual bikes, and the overlay modals 
+ * used for registering new bikes and reporting bikes as stolen.
+ */
+
+/* --- General Form & Button Overrides --- */
 input, select{
     background-color: lightgrey;
     padding: 1rem;
@@ -20,6 +30,7 @@ button:hover{
     transition: var(--transition-duration) var(--transition-easing);
     cursor: pointer;
 }
+
 /* --- Top Toolbar Section (Search & Filter) --- */
 .container {
     max-width: 90vw;
@@ -40,6 +51,7 @@ button:hover{
     gap: 1rem;
 }
 
+/* Constrain search width for better aesthetics on wide screens */
 .search-group {
     position: relative;
     flex: 1 1 0;
@@ -47,6 +59,7 @@ button:hover{
     max-width: 30%;
 }
 
+/* Ensure padding accounts for the absolute positioned search icon */
 .search-input {
     width: 100%;
     padding: 0.5rem 0.5rem 0.5rem 2rem;
@@ -56,6 +69,7 @@ button:hover{
     box-sizing: border-box;
 }
 
+/* Search icon pseudo-element */
 .search-group::before {
     content: "🔍";
     position: absolute;
@@ -80,9 +94,7 @@ button:hover{
 }
 
 /* --- Bike Cards Section --- */
-
 .bikes-section {
-
     padding: 0 0 var(--spacing-xl);
 }
 
@@ -113,12 +125,14 @@ button:hover{
     font-size: var(--font-size-base);
 }
 
+/* Automatically size grid columns based on available width */
 .bikes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--spacing-lg);
 }
 
+/* Applying a frosted glass effect to the bike cards */
 .bike-card {
     background-color: #2b273078;
     backdrop-filter: blur(12px);
@@ -137,6 +151,7 @@ button:hover{
     box-shadow: var(--shadow-lg);
 }
 
+/* Force image aspect ratio constraints */
 .bike-card-image {
     width: 100%;
     height: 180px;
@@ -160,6 +175,7 @@ button:hover{
     margin: 0;
 }
 
+/* Pill styling for the bike type label */
 .bike-card-type {
     font-family: var(--font-primary);
     font-size: var(--font-size-xs);
@@ -171,6 +187,7 @@ button:hover{
     white-space: nowrap;
 }
 
+/* --- Status Indicator Colours --- */
 .status-active {
     background-color: var(--status-active);
     color: var(--colour-light-primary);
@@ -191,6 +208,7 @@ button:hover{
     color: var(--colour-light-primary);
 }
 
+/* Split detail stats into two columns */
 .bike-card-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -220,8 +238,9 @@ button:hover{
     color: var(--colour-light-primary);
 }
 
-/* --- Bike Card Actions --- */
+/* --- Bike Card Actions (Hover Overlay) --- */
 
+/* Initially hide the action overlays; position absolute to cover the card */
 .bike-card-status-menu, .bike-card-delete-menu, .bike-card-actions {
     position: absolute;
     inset: 0;
@@ -251,6 +270,7 @@ button:hover{
     margin: 0;
 }
 
+/* Large interactive buttons within the action overlays */
 .status-option{
     display: flex;
     align-items: center;
@@ -267,12 +287,13 @@ button:hover{
     width: 70%;
 }
 
-
+/* Reveal action controls when card is hovered */
 .bike-card:hover:not(.hide-actions) .bike-card-actions {
     opacity: 1;
     visibility: visible;
 }
 
+/* Icon button styles for the card hover state */
 .action-btn {
     display: flex;
     flex-direction: column;
@@ -303,8 +324,9 @@ button:hover{
     color: var(--colour-highlight-secondary);
 }
 
+/* Danger colour for delete hover state */
 .action-delete:hover {
-    color: #ef4444;
+    color: #ef4444; 
 }
 
 .bike-card-footer {
@@ -330,12 +352,13 @@ button:hover{
     opacity: 0.4;
 }
 
-
 /* --- Register Bike Modal --- */
 
-/* Hide inert elements to prevent them from being visible, focusable, or read by screen readers.
-The inert attribute is preferred over aria-hidden as it also prevents focus.
-*/
+/* 
+ * Hide inert elements to prevent them from being visible, focusable, 
+ * or read by screen readers. The inert attribute is preferred over 
+ * aria-hidden as it also prevents focus.
+ */
 .modal-overlay[inert] {
     display: none;
 }
@@ -344,6 +367,7 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     display: none !important;
 }
 
+/* Full screen overlay behaviour */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -354,6 +378,7 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     z-index: var(--z-index-modal);
 }
 
+/* Constrain modal size and allow vertical scrolling for long forms */
 .modal-dialog {
     background-color: #2b273078;
     backdrop-filter: blur(12px);
@@ -396,12 +421,14 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     transition: var(--transition-duration) var(--transition-easing);
 }
 
+/* Basic grid structure for the modal form inputs */
 .modal-body form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-base);
 }
 
+/* Utility to span full width within the grid layout */
 .form-row-full {
     grid-column: 1 / -1;
 }
@@ -435,6 +462,7 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     padding: 0.4rem;
 }
 
+/* Unique submission styling separated from global button styles */
 .modal-body button[type="submit"] {
     background-color: var(--colour-highlight-secondary);
     padding: 0.65rem;
@@ -456,12 +484,12 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
 
 /* --- Report Stolen Modal --- */
 
-/* Highlight the bike nickname in the modal title */
+/* Highlight the bike nickname visually within the modal title */
 #reportStolenModal strong {
     color: var(--colour-highlight-secondary);
 }
 
-/* Button styles for the Report Stolen modal */
+/* Enforce styling on all buttons exception the close cross icon */
 #reportStolenModal button:not(.modal-close){
     background-color: var(--colour-highlight-secondary);
     border-radius: var(--border-radius-base);
@@ -473,7 +501,7 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     transition: var(--transition-duration) var(--transition-easing);
 }
 
-/* Location input + search button inline group */
+/* Layout for mapping text input inline with the geospatial search action */
 .location-input-group {
     display: flex;
     gap: var(--spacing-xs);
@@ -493,7 +521,7 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     cursor: pointer;
 }
 
-/* Map container in the Report Stolen modal */
+/* Container for Leaflet map component (hidden initially) */
 #reportMap {
     display: none;
     height: 280px;
@@ -502,7 +530,7 @@ The inert attribute is preferred over aria-hidden as it also prevents focus.
     z-index: 1;
 }
 
-/* Feedback text below the search button */
+/* State messaging container beneath the geospatial map fetcher */
 #locationFeedback {
     display: none;
     font-family: var(--font-primary);

@@ -1,3 +1,13 @@
+/*
+ * Login and Register Stylesheet
+ * 
+ * Provides layout and styling for the authentication pages (Login, Register, 
+ * and Two-Factor Authentication). This includes the central frosted-glass 
+ * card layout, typography overrides, form input styling, and the QR code 
+ * display for 2FA setup.
+ */
+
+/* --- Base Typography --- */
 h1{
     font-family: var(--font-secondary);
     font-size: var(--font-size-3xl);
@@ -12,15 +22,17 @@ p{
     color: var(--colour-light-primary);
     opacity: 0.8;
 }
+
+/* --- Layout Containers --- */
 .header{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-
 }
 
+/* Ensure the main content is centred vertically across the entire viewport height */
 .container{
     display: flex;
     align-items: center;
@@ -28,6 +40,7 @@ p{
     min-height: 100svh;
 }
 
+/* The central frosted-glass style card holding the auth form and logo */
 .login-card{
     display: flex;
     align-items: center;
@@ -36,6 +49,7 @@ p{
     border-radius: var(--border-radius-lg);
 } 
 
+/* --- Form Elements --- */
 .login-form{
     display: flex;
     flex-direction: column;
@@ -52,6 +66,7 @@ p{
     gap: var(--spacing-lg);
 }
 
+/* Standardised input styling for auth forms */
 .login-form input{
     background-color: lightgrey;
     padding: 0.8rem;
@@ -59,6 +74,7 @@ p{
     width: 23vw;
 }
 
+/* Styled submission button */
 .login-form button{
     background-color: var(--colour-highlight-secondary);
     padding: 0.5rem;
@@ -67,7 +83,6 @@ p{
     font-family: var(--font-primary);
     font-size: var(--font-size-base);
     font-weight: var(--font-weight-medium);
-
 }
 
 .login-form button:hover{
@@ -77,7 +92,12 @@ p{
     cursor: pointer;
 }
 
+.login-form p {
+    text-align: center;
+}
 
+/* --- Visuals & Branding --- */
+/* Forces the logo to remain perfectly circular */
 .login-logo img{
     width: 25vw;
     aspect-ratio: 1/1;
@@ -85,6 +105,7 @@ p{
     border-radius: 100vw;
 }
 
+/* --- Helper Links & Messaging --- */
 .register{
     justify-content: center;
     align-items: center;
@@ -104,6 +125,7 @@ p{
     transition: var(--transition-duration) var(--transition-easing);
 }
 
+/* Red error text styling for invalid login attempts or validation failures */
 #message{
     color: red;
     font-family: var(--font-primary);
@@ -113,6 +135,8 @@ p{
     text-align: center;
 }
 
+/* --- Two-Factor Authentication (2FA) --- */
+/* Provides a clean, white background block so the QR code remains scannable */
 .qr-code {
     display: flex;
     justify-content: center;
@@ -125,13 +149,10 @@ p{
     margin: 0 auto;
 }
 
+/* Enforce rigid sizing on the SVG itself to prevent overflow */
 .qr-code svg {
-        width: 200px;
-        height: 200px;
-}
-
-.login-form p {
-    text-align: center;
+    width: 200px;
+    height: 200px;
 }
 
 

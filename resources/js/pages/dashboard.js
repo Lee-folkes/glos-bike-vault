@@ -1,16 +1,22 @@
-// JavaScript for the dashboard page functionality
-// This file is included in the dashboard Blade template and handles
-// interactions such as search, filter, and sort for the bike cards.
+/**
+ * User Dashboard Logic
+ * 
+ * This script governs the interactive behaviour on the main user dashboard.
+ * It manages the dual-purpose modal used for both registering and editing bikes, 
+ * controls the visibility of contextual hover menus on bike cards, and handles 
+ * asynchronous status updates. Additionally, it drives the 'Report Stolen' workflow,
+ * integrating with Leaflet.js and the OpenStreetMap Nominatim API for geospatial searches.
+ */
 
-// Get references to key DOM elements
+// --- Global DOM References ---
 const modal = document.getElementById('registerBikeModal');
 const modalTitle = document.getElementById('registerBikeModalLabel');
 const form = document.getElementById('registerBikeForm');
 const formMethod = document.getElementById('formMethod');
-const storeUrl = form.getAttribute('action'); // original POST url
+const storeUrl = form.getAttribute('action'); // The original POST routing URL
 const BikeSubmitBtn = document.getElementById('BikeSubmitBtn');
 
-// Field names that map to form input names
+// Map of field names to ensure we populate all relevant inputs during edits
 const bikeFields = [
     'nickname', 'brand', 'model', 'type', 'mpn',
     'wheel_size', 'colour', 'num_gears', 'brake_type',
@@ -18,7 +24,8 @@ const bikeFields = [
 ];
 
 /**
- * Open the modal in "Register" mode — empty form, POST action.
+ * Initialise the modal in "Register" mode.
+ * Clears the form and configures it for a standard POST action.
  */
 function openRegisterModal() {
     modalTitle.textContent = 'Register New Bike';
@@ -31,13 +38,16 @@ function openRegisterModal() {
 }
 
 /**
- * Open the modal in "Edit" mode — pre-filled form, PUT action.
+ * Initialise the modal in "Edit" mode.
+ * Pre-fills the form with existing bike details and configures it for a PUT action.
+ * 
+ * @param {string} bikeId - The unique identifier for the bike.
+ * @param {Object} bikeData - JSON object containing the bike's current details.
  */
 function openEditModal(bikeId, bikeData) {
     modalTitle.textContent = 'Edit Bike';
     BikeSubmitBtn.textContent = 'Update Bike';
-    form.action = storeUrl + '/' + bikeId;   // /bikes/{id}
-    formMethod.value = 'PUT';
+    form.action = storeUrl + '/' + bikeId;   // Adjust route to point to the specific resource (/bikes/{id})
 
     const bikeImageInput = form.querySelector('[name="bike_image"]');
     if (bikeImageInput) {

@@ -1,4 +1,13 @@
 <?php
+/**
+ * Handles core administrative operations for the application.
+ * 
+ * This controller manages the primary admin dashboard, providing search, 
+ * filtering, and pagination for tracking stolen and recovered bikes. It 
+ * also oversees the secure registration and role assignment of new 
+ * administrator accounts.
+ */
+
 
 namespace App\Http\Controllers;
 
@@ -44,17 +53,20 @@ class AdminController extends Controller
 
     public function createAdmin()
     {
+        // Display the registration form for new administrators
         return view('admin.create-admin');
     }
 
     public function storeAdmin(Request $request)
     {
+        // 1. Validate the incoming request data
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+        // 2. Create the new user and explicitly assign the ADMIN role
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -62,6 +74,7 @@ class AdminController extends Controller
             'role' => UserRole::ADMIN,
         ]);
 
+        // 3. Redirect back to the admin dashboard with a success flash message
         return redirect()->route('admin.dashboard')->with('status', 'Admin user created successfully.');
     }
 }

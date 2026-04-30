@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Represents a Bike entity within the application.
+ * 
+ * This Eloquent model manages bike details, characteristics, and status tracking 
+ * (such as when and where it was stolen). It defines the ownership relationship 
+ * to a User and integrates with Laravel Scout to enable full-text searching, 
+ * specifically configured to index the Manufacturer Part Number (MPN).
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +43,7 @@ class Bike extends Model
     protected $casts = [
         'stolen_at' => 'datetime',
     ];
+
     /*
     * Get the user that owns the bike.
      */
@@ -52,6 +62,4 @@ class Bike extends Model
             'mpn' => $this->mpn,
         ];
     }
-
-
 }
