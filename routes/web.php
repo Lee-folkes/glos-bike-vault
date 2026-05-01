@@ -5,10 +5,9 @@ use App\Http\Controllers\BikeController;
 use App\Enums\UserRole;
 use App\Http\Controllers\AdminController;
 
-// Show the landing page
-Route::get('/', function () {
-    return view('welcome');
-});
+// Set the default route to redirect to the dashboard, which will handle role-based content display
+// Users will be pushed to the login page, if not already authenticated.
+Route::redirect('/', '/dashboard');
 
 // Login and Register views are handled by Fortify (see FortifyServiceProvider)
 
