@@ -157,3 +157,6 @@ p{
 
 
 /*TODO: Add media queries for responsiveness */
+.login-container-min-height {
+    min-height: calc(100svh - 120px);
+}

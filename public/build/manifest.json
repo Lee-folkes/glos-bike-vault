@@ -27,12 +27,21 @@
     ]
   },
   "resources/css/pages/login_register.css": {
-    "file": "assets/login_register-B2Qe0J1o.css",
+    "file": "assets/login_register-DqJV5a5t.css",
     "src": "resources/css/pages/login_register.css",
     "isEntry": true,
     "name": "login_register",
     "names": [
       "login_register.css"
+    ]
+  },
+  "resources/css/pages/profile.css": {
+    "file": "assets/profile-COvLy_gr.css",
+    "src": "resources/css/pages/profile.css",
+    "isEntry": true,
+    "name": "profile",
+    "names": [
+      "profile.css"
     ]
   },
   "resources/js/app.js": {
@@ -51,6 +60,12 @@
     "file": "assets/dashboard-Cj5iCh3l.js",
     "name": "dashboard",
     "src": "resources/js/pages/dashboard.js",
+    "isEntry": true
+  },
+  "resources/js/pages/profile.js": {
+    "file": "assets/profile-ChtxMMlx.js",
+    "name": "profile",
+    "src": "resources/js/pages/profile.js",
     "isEntry": true
   }
 }

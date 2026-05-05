@@ -12,9 +12,11 @@ export default defineConfig({
                  'resources/css/pages/login_register.css',
                  'resources/css/pages/dashboard.css',
                  'resources/css/pages/admin-dashboard.css',
+                 'resources/css/pages/profile.css',
                  //Page specific js
                  'resources/js/pages/dashboard.js',
                  'resources/js/pages/admin-dashboard.js',
+                 'resources/js/pages/profile.js',
                 ],
             refresh: true,
         }),

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @push('styles')
-    @vite('resources/css/pages/login_register.css')
+    @vite(['resources/css/pages/dashboard.css', 'resources/css/pages/login_register.css', 'resources/css/pages/profile.css'])
 @endpush
 @section('content')
 
-<div class="container" style="min-height: calc(100svh - 120px);">
+<div class="container login-container-min-height">
     <div class="login-card">
         <div class="login-form">
             <div class="header">
-                <h1>Add Admin User</h1>
+                <h1 class="profile-section-heading">Add Admin User</h1>
                 <p>Register a new police administrator</p>
             </div>
             <form method="POST" action="{{ route('admin.store-admin') }}">
@@ -20,7 +20,7 @@
                 <button type="submit">Create User</button>
                 
                 @if ($errors->any())
-                    <div style="color: red; margin-top: 10px;">
+                    <div class="profile-form-error">
                         @foreach ($errors->all() as $error)
                             <p>{{ $error }}</p>
                         @endforeach
