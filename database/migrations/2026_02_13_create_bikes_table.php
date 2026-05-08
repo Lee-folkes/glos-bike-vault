@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('bikes', function (Blueprint $table) {
                 $table->id();
+                // Establishes a relational link to the users table
                 $table->foreignId('user_id')->constrained()->onDelete('cascade');
                 $table->string('nickname');
                 $table->string('mpn');
